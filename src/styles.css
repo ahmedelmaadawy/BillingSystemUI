@@ -1,9 +1,12 @@
+body{
+    background-color: #ECEDF1;
+}
 .content {
     margin-left: 220px;
     padding: 20px;
     transition: margin-left 0.3s ease;
   }
-  
+
   .sidebar:hover ~ .content {
     margin-left: 250px;
   }

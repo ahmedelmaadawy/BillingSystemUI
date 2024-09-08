@@ -10,5 +10,5 @@ import { SidebarComponent } from '../Components/sidebar/sidebar.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'BillingSystemUI';
+  title = 'task';
 }
