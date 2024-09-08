@@ -1,0 +1,35 @@
+.company{
+    width: 450px;
+    background-color: white;
+    padding: 40px 20px;
+    height: fit-content;
+    border-radius: 8px;
+}
+p{
+    margin: 10px 0 0 5px;
+}
+.text-danger{
+    font-size: 12px;
+    margin: 5px 0 0 10px;
+}
+input{
+    background-color: #DDE6ED;
+}
+input:focus{
+    outline: none;
+    border: 1px solid black;
+    box-shadow: none;
+    background-color: #DDE6ED;
+
+}
+.item{
+    margin: 20px 0;
+}
+button{
+    outline: none;
+    border: none;
+    background-color: #27374e;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 8px;
+}
