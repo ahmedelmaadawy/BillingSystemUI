@@ -1,0 +1,41 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .card-header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-title {
+    margin: 0;
+  }
+  
+  .table {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  thead {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
