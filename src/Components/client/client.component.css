@@ -1,0 +1,27 @@
+body{
+  background-color: rgba(128, 128, 128, 0.352);
+
+}
+
+.container{
+  width: 40%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+h3{
+  text-align: center;
+  margin: 15px 0 20px 0;
+}
+
+.submit{
+  display: block;
+  margin: 50px auto 10px auto ;
+  background-color: rgba(39, 55, 77, 1);
+  color: white;
+}
+/* .submit:hover{
+  border: solid 2px  rgba(39, 55, 77, 1) ;
+  font-weight: bold;
+} */
