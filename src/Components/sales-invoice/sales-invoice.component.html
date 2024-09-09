@@ -1,0 +1,152 @@
+<div class="container mt-4">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5><i class="fas fa-info-circle"></i> Bills Details</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="billsDate">Bills Date:</label>
+              <input type="date" id="billsDate" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="billsNumber">Bills Number:</label>
+              <input type="text" id="billsNumber" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="clientName">Client Name:</label>
+              <select id="clientName" class="form-control">
+                <option>Choose From Clients</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5><i class="fas fa-box"></i> Item Details</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="itemsName">Items Name:</label>
+              <select id="itemsName" class="form-control">
+                <option>Choose From Items</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="sellingPrice">Selling Price:</label>
+              <input type="text" id="sellingPrice" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="quantity">Quantity:</label>
+              <input type="text" id="quantity" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="total">Total:</label>
+              <input type="text" id="total" class="form-control" />
+            </div>
+          </div>
+          <button class="btn btn-success mt-3"><i class="fas fa-plus"></i> Add</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Other Details Card -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5><i class="fas fa-list-alt"></i> Other Details</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="billsTotal">Bills Total:</label>
+              <input type="text" id="billsTotal" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="percentageDiscount">Percentage Discount:</label>
+              <input type="text" id="percentageDiscount" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="valueDiscount">Value Discount:</label>
+              <input type="text" id="valueDiscount" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="theNet">The Net:</label>
+              <input type="text" id="theNet" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="paidUp">Paid Up:</label>
+              <input type="text" id="paidUp" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="theRest">The Rest:</label>
+              <input type="text" id="theRest" class="form-control" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Request A Form Card -->
+    <div class="card mb-4">
+        <div class="card-header">
+        <h5><i class="fas fa-file"></i> Request A Form</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="requestForm">
+            <div class="row mb-3">
+              <!-- Employee Name -->
+              <div class="col-md-12">
+                <label for="employeeName" class="form-label">Employee Name</label>
+                <select id="employeeName" formControlName="employeeName" class="form-select">
+                  <option value="">Choose Employee</option>
+                  <option value="Tasneem Saleh">Tasneem Saleh</option>
+                  <!-- Add more employee options here -->
+                </select>
+              </div>
+            </div>
+      
+            <div class="row mb-3">
+              <!-- Date -->
+              <div class="col-md-12">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" formControlName="date" class="form-control">
+              </div>
+            </div>
+      
+            <div class="row mb-3">
+              <!-- Start Time -->
+              <div class="col-md-6">
+                <label for="startTime" class="form-label">Start Time</label>
+                <input type="time" id="startTime" formControlName="startTime" class="form-control">
+              </div>
+      
+              <!-- End Time -->
+              <div class="col-md-6">
+                <label for="endTime" class="form-label">End Time</label>
+                <input type="time" id="endTime" formControlName="endTime" class="form-control">
+              </div>
+            </div>
+      
+            <div class="row">
+              <div class="col-md-12 d-flex justify-content-end">
+                <!-- Cancel Button -->
+                <button type="button" class="btn btn-danger me-2" (click)="resetForm()">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+      
+                <!-- Save Button -->
+                <button type="button" class="btn btn-success">
+                  <i class="fas fa-save"></i> Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
