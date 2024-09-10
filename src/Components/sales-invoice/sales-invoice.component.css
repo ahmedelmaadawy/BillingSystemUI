@@ -17,3 +17,13 @@ button {
   width: 100px;
   float: left;
 }
+th{
+  background-color: #2babbf;
+  color: #fff;
+  text-align: center;
+  font-weight: normal;
+}
+
+td{
+  text-align: center;
+}
