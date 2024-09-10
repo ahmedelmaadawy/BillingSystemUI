@@ -1,5 +1,5 @@
 body{
-  background-color: rgba(128, 128, 128, 0.352);
+  background-color: #ECEDF1;
 
 }
 
@@ -12,12 +12,20 @@ body{
 }
 h3{
   text-align: center;
-  margin: 15px 0 20px 0;
+  margin: 15px 0 15px 0;
 }
+
+.undeline{
+  background-color: black;
+  width: 55%;
+  height: 3px;
+  margin: 0 auto 30px auto;
+}
+
 
 .submit{
   display: block;
   margin: 30px auto 10px auto ;
-  background-color: rgba(39, 55, 77, 1);
+  background-color: #2babbf;
   color: white;
 }
