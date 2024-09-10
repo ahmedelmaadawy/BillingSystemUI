@@ -5,6 +5,7 @@ import { ClientComponent } from "../Components/client/client.component";
 import { EmployeeComponent } from "../Components/employee/employee.component";
 import { HomeComponent } from '../Components/home/home.component';
 import { SalesInvoiceComponent } from '../Components/sales-invoice/sales-invoice.component';
+import { ItemComponent } from '../Components/item/item.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { SalesInvoiceComponent } from '../Components/sales-invoice/sales-invoice
     EmployeeComponent,
     HomeComponent,
     SalesInvoiceComponent,
+    ItemComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
