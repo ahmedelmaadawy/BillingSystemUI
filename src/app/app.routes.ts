@@ -6,6 +6,7 @@ import { HomeComponent } from '../Components/home/home.component';
 
 import { ClientComponent } from '../Components/client/client.component';
 import { EmployeeComponent } from '../Components/employee/employee.component';
+import { UnitFormComponent } from '../Components/unit-form/unit-form.component';
 
 import { TypesComponent } from '../Components/types/types.component';
 import { SalesreportComponent } from '../Components/salesreport/salesreport.component';
@@ -23,4 +24,5 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
+  { path: 'unit-form', component: UnitFormComponent, title: 'UnitForm' },
 ];
