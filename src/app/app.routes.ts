@@ -10,6 +10,7 @@ import { UnitFormComponent } from '../Components/unit-form/unit-form.component';
 
 import { TypesComponent } from '../Components/types/types.component';
 import { SalesreportComponent } from '../Components/salesreport/salesreport.component';
+import { ItemComponent } from '../Components/item/item.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -24,5 +25,6 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
+  {path:'items', component:ItemComponent ,title:'Items'},
   { path: 'unit-form', component: UnitFormComponent, title: 'UnitForm' },
 ];

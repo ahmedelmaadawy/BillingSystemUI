@@ -6,6 +6,7 @@ import { EmployeeComponent } from '../Components/employee/employee.component';
 import { UnitFormComponent } from '../Components/unit-form/unit-form.component';
 import { HomeComponent } from '../Components/home/home.component';
 import { SalesInvoiceComponent } from '../Components/sales-invoice/sales-invoice.component';
+import { ItemComponent } from '../Components/item/item.component';
 import { UnitsComponent } from '../Components/units/units.component';
 
 @Component({
@@ -19,6 +20,7 @@ import { UnitsComponent } from '../Components/units/units.component';
     HomeComponent,
     SalesInvoiceComponent,
     UnitsComponent,
+    ItemComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
