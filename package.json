@@ -21,13 +21,9 @@
     "@angular/platform-server": "^18.1.0",
     "@angular/router": "^18.1.0",
     "@angular/ssr": "^18.2.3",
-<<<<<<< HEAD
-    "bootstrap": "^5.3.3",
-=======
     "@fortawesome/fontawesome-free": "^6.6.0",
     "bootstrap": "^5.3.3",
     "modules": "^0.4.0",
->>>>>>> 74d72c50a8e2bb1757d0e9b810b19249bc010f44
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
