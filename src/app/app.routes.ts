@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { CompanyComponent } from './Components/company/company.component';
 import { UnitsComponent } from './Components/units/units.component';
+import { StorageReportComponent } from './Components/storage-report/storage-report.component';
+
 import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.component';
 import { HomeComponent } from './Components/home/home.component';
 
@@ -27,4 +29,6 @@ export const routes: Routes = [
   },
   { path: 'items', component: ItemComponent, title: 'Items' },
   { path: 'unit-form', component: UnitFormComponent, title: 'UnitForm' },
+    {path:"storage-report",component:StorageReportComponent,title:"StorageReport"}
+
 ];
