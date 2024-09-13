@@ -18,7 +18,9 @@ export class CompanyServiceService {
       `https://localhost:44357/api/Company/${id}`
     );
    }
-  addCompany() { }
+  addCompany(company: ICompany):Observable<ICompany> {
+    return  this.httpClient.post<ICompany>(`https://localhost:44357/api/Company`,company);
+   }
   editCompany() { }
   deleteCompany(){}
 
