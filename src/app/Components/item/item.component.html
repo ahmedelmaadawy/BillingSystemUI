@@ -1,8 +1,7 @@
 <div class="container mt-5">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Types Form</h3>
-      <p>This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+      <h3 class="card-title">Items Form</h3>
     </div>
     <div class="card-body">
       <form >
@@ -21,7 +20,7 @@
           <div class="col-sm-9">
             <select id="typeName" formControlName="typeName" class="form-control">
               <option value="">choose from Types</option>
-              <option *ngFor="let type of type">{{ type }}</option>
+              <option *ngFor="let type of types">{{ type }}</option>
             </select>
           </div>
         </div>
@@ -54,7 +53,7 @@
           <div class="col-sm-9">
             <select id="unit" formControlName="unit" class="form-control">
               <option value="">choose from units</option>
-              <option *ngFor="let unit of unit">{{ unit }}</option>
+              <option *ngFor="let unit of units">{{ unit }}</option>
             </select>
           </div>
         </div>

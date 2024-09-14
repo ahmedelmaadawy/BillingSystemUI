@@ -1,45 +1,86 @@
-import { Component } from '@angular/core';
+import { CompanyServiceService } from './../../Services/company-service.service';
+import { ICompany } from './../../Models/ICompany';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IType } from '../../Models/IType';
+import { TypeService } from '../../Services/type.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-types',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './types.component.html',
-  styleUrls: ['./types.component.css']
+  styleUrls: ['./types.component.css'],
 })
-export class TypesComponent {
-  typeForm: FormGroup;  // تعريف typeForm كخاصية للمكون
-  companies = ['Company A', 'Company B', 'Company C'];  // مثال لشركات
-
+export class TypesComponent implements OnInit {
+  typeForm: FormGroup;
+  companies?: ICompany[];
+  types?: IType[];
   constructor(
-    private fb: FormBuilder,  // حقن FormBuilder
-    private router: Router     // حقن Router
+    private fb: FormBuilder,
+    private router: Router,
+    private _companyService: CompanyServiceService,
+    private _typeService: TypeService
   ) {
-    // تهيئة النموذج مباشرة داخل الـ Constructor
     this.typeForm = this.fb.group({
-      companyName: ['', Validators.required],
-      typeName: ['', [Validators.required, this.isTypeNameDuplicate.bind(this)]]
+      companyId: ['', Validators.required],
+      name: ['', [Validators.required, this.isTypeNameDuplicate.bind(this)]],
+      note: [''],
+    });
+  }
+  ngOnInit(): void {
+    this._companyService.getAllCompanies().subscribe({
+      next: (response) => {
+        this.companies = response;
+        console.log(this.companies);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this._typeService.getAllTypes().subscribe({
+      next: (response) => {
+        this.types = response;
+        console.log(this.types);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
-  // دالة التحقق من صحة النموذج عند الإرسال
   onSubmit(): void {
     if (this.typeForm.valid) {
       console.log('Form Submitted:', this.typeForm.value);
-      // تنفيذ الإجراء بعد التحقق من صحة النموذج، مثل التوجيه
-      // this.router.navigate(['/some-route']); // توجيه بعد الإرسال، إذا لزم الأمر
+      this._typeService.addType(this.typeForm.value).subscribe({
+        next: () => {
+          Swal.fire({
+            title: 'Saved Successfully',
+            text: 'Do you want to continue',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error In Database',
+            text: `Something went wrong! name must be unique`,
+            footer: '<a href="#">Why do I have this issue?</a>',
+          });
+        },
+      });
     } else {
       console.log('Form Invalid');
     }
   }
 
-  // دالة التحقق من تكرار اسم النوع
   isTypeNameDuplicate(control: any): { [key: string]: boolean } | null {
-    const existingTypes = ['Type A', 'Type B'];  // مثال على الأنواع الموجودة
+    const existingTypes = ['Type A', 'Type B'];
     if (existingTypes.includes(control.value)) {
       return { duplicate: true };
     }

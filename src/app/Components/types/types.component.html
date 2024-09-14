@@ -2,38 +2,66 @@
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Types Form</h3>
-      <p>This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
     </div>
     <div class="card-body">
       <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
         <div class="form-group row mb-3">
-          <label for="companyName" class="col-sm-3 col-form-label">Company Name:</label>
+          <label for="companyName" class="col-sm-3 col-form-label"
+            >Company Name:</label
+          >
           <div class="col-sm-9">
-            <select id="companyName" formControlName="companyName" class="form-control">
-              <option value="">choose from Companies</option>
-              <option *ngFor="let company of companies">{{ company }}</option>
+            <select
+              id="companyName"
+              formControlName="companyId"
+              class="form-control"
+            >
+              <option selected disabled>choose from Companies</option>
+              <option
+                *ngFor="let company of companies"
+                value="{{ company.id }}"
+              >
+                {{ company.name }}
+              </option>
             </select>
           </div>
         </div>
 
         <div class="form-group row mb-3">
-          <label for="typeName" class="col-sm-3 col-form-label">Type Name:</label>
+          <label for="typeName" class="col-sm-3 col-form-label"
+            >Type Name:</label
+          >
           <div class="col-sm-9">
-            <input id="typeName" type="text" formControlName="typeName" class="form-control" placeholder="Enter Type Name">
+            <input
+              id="typeName"
+              type="text"
+              formControlName="name"
+              class="form-control"
+              placeholder="Enter Type Name"
+            />
           </div>
         </div>
 
         <div class="form-group row mb-3">
           <label for="notes" class="col-sm-3 col-form-label">Notes:</label>
           <div class="col-sm-9">
-            <textarea id="notes" formControlName="notes" rows="3" class="form-control" placeholder="Enter Notes"></textarea>
+            <textarea
+              id="notes"
+              formControlName="note"
+              rows="3"
+              class="form-control"
+              placeholder="Enter Notes"
+            ></textarea>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-9 offset-sm-3">
-            <button type="submit" class="btn btn-success me-2"><i class="fa fa-save"></i> Save</button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
+            <button type="submit" class="btn btn-success me-2">
+              <i class="fa fa-save"></i> Save
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="fa fa-times"></i> Cancel
+            </button>
           </div>
         </div>
       </form>

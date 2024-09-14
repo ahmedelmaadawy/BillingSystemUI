@@ -28,7 +28,10 @@ export const routes: Routes = [
     title: 'Salesreport',
   },
   { path: 'items', component: ItemComponent, title: 'Items' },
-  { path: 'unit-form', component: UnitFormComponent, title: 'UnitForm' },
-    {path:"storage-report",component:StorageReportComponent,title:"StorageReport"}
-
+  { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
+  {
+    path: 'storage-report',
+    component: StorageReportComponent,
+    title: 'StorageReport',
+  },
 ];

@@ -2,7 +2,7 @@
     <h3>Add New Company</h3>
     <form [formGroup]="CompanyForm" (ngSubmit)="AddCompany()" >
         <div class="item">
-            <p>Company Name</p>
+             <p>Company Name</p>
             <input formControlName="name" type="text" class="form-control" placeholder="Name" id="name">
             @if (CompanyForm.get("name")?.errors && CompanyForm.get("name")?.touched) {
                 @if (CompanyForm.get("name")?.getError("required")) {
@@ -12,21 +12,21 @@
                   <p class=" text-danger">minLength is 3</p>
                 }
                 @if (CompanyForm.get("name")?.getError("maxlength")) {
-                  <p class=" text-danger">maxLength is 20</p>
+                  <p class=" text-danger">maxLength is 200</p>
                 }
               }
         </div>
         <div class="item">
             <p>Company details</p>
-            <input formControlName="details" type="text" class="form-control" placeholder="details" id="details">
-            @if (CompanyForm.get("details")?.errors && CompanyForm.get("details")?.touched) {
-                @if (CompanyForm.get("details")?.getError("required")) {
+            <input formControlName="note" type="text" class="form-control" placeholder="details" id="details">
+            @if (CompanyForm.get("note")?.errors && CompanyForm.get("note")?.touched) {
+                @if (CompanyForm.get("note")?.getError("required")) {
                   <p class=" text-danger">details is required</p>
                 }
-                @if (CompanyForm.get("details")?.getError("minlength")) {
+                @if (CompanyForm.get("note")?.getError("minlength")) {
                   <p class=" text-danger">minLength is 3</p>
                 }
-                @if (CompanyForm.get("details")?.getError("maxlength")) {
+                @if (CompanyForm.get("note")?.getError("maxlength")) {
                   <p class=" text-danger">maxLength is 20</p>
                 }
               }
