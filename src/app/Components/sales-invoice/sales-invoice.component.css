@@ -1,0 +1,29 @@
+.card-header {
+  background-color: #2babbf;
+  border-bottom: 2px solid #ddd;
+  color: #fff;
+}
+
+.card {
+  border-radius: 8px;
+}
+
+h5 {
+  margin-bottom: 0;
+}
+
+button {
+  display: block;
+  width: 100px;
+  float: left;
+}
+th{
+  background-color: #2babbf;
+  color: #fff;
+  text-align: center;
+  font-weight: normal;
+}
+
+td{
+  text-align: center;
+}
