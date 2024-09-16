@@ -1,0 +1,38 @@
+<div class="company-section">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h3 class="company-heading text-center">Companies</h3>
+      </div>
+      <div class="col-md-6 text-end">
+        <a class="custom-button" routerLink="/company"> Add New Company </a>
+      </div>
+    </div>
+    <div class="company-table-container">
+      <table class="table table-hover company-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Company Details</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of companies; track item.id) {
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.note }}</td>
+            <td class="action-icons">
+              <i class="fa-solid fa-edit text-warning"></i>
+              <i
+                class="fa-solid fa-delete-left text-danger"
+                (click)="deleteCompany(item.id)"
+              ></i>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

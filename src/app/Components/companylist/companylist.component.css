@@ -1,0 +1,72 @@
+/* General button styling */
+.custom-button {
+  outline: none;
+  border: none;
+  padding: 10px 25px;
+  margin: 20px 0;
+  text-decoration: none;
+  background-color: #2cacbf;
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #27374e;
+  color: white;
+}
+
+/* Heading style */
+.company-heading {
+  color: #27374e;
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Centered table */
+.company-table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.company-table {
+  margin-top: 60px;
+  width: 80%;
+  /* Increased table size */
+}
+
+/* Table header */
+.company-table thead tr th {
+  background-color: #2cacbf;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  /* Centered header values */
+}
+
+/* Table body */
+.company-table tbody tr td {
+  padding: 15px;
+  text-align: center;
+  /* Centered body values */
+  vertical-align: middle;
+}
+
+.company-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action icons */
+.action-icons i {
+  margin: 0 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.action-icons i:hover {
+  color: #2cacbf;
+}
