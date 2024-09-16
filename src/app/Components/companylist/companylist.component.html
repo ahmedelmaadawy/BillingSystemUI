@@ -23,7 +23,9 @@
             <td>{{ item.name }}</td>
             <td>{{ item.note }}</td>
             <td class="action-icons">
-              <i class="fa-solid fa-edit text-warning"></i>
+              <i class="fa-solid fa-edit text-warning"
+                [routerLink]="['/company/', item.id ]"
+              ></i>
               <i
                 class="fa-solid fa-delete-left text-danger"
                 (click)="deleteCompany(item.id)"
