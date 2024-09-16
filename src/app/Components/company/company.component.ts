@@ -13,7 +13,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,RouterLink,RouterLinkActive],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css',
 })
