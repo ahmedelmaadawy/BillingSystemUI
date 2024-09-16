@@ -8,12 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ICompany } from '../../Models/ICompany';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,RouterLink,RouterLinkActive],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css',
 })
@@ -42,7 +42,7 @@ export class CompanyComponent {
     this._companyService.addCompany(this.CompanyForm.value).subscribe({
       next: (response) => {
         alert('Company Saved Successfuly');
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/company-list');
       },
       error: (err) => {
         console.log(this.CompanyForm.value);
