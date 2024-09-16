@@ -70,7 +70,6 @@ export class TypesComponent implements OnInit {
             icon: 'error',
             title: 'Error In Database',
             text: `Something went wrong! name must be unique`,
-            footer: '<a href="#">Why do I have this issue?</a>',
           });
         },
       });

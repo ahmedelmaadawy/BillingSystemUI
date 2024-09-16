@@ -13,12 +13,15 @@ import { UnitFormComponent } from './Components/unit-form/unit-form.component';
 import { TypesComponent } from './Components/types/types.component';
 import { SalesreportComponent } from './Components/salesreport/salesreport.component';
 import { ItemComponent } from './Components/item/item.component';
+import { CompanylistComponent } from './Components/companylist/companylist.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
   { path: 'company', component: CompanyComponent, title: 'Company' },
   { path: 'unit', component: UnitsComponent, title: 'Units' },
+  { path: 'company-list', component: CompanylistComponent, title: 'Companies' },
+
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types', component: TypesComponent, title: 'Types' },

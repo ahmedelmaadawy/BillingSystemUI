@@ -12,14 +12,14 @@ import { IClient } from '../../Models/IClient';
   styleUrl: './client.component.css'
 })
 export class ClientComponent implements OnInit {
-  
+
   clients: IClient[] = [];  // To store the list of clients
   clientId:number=0;
   isupdate:boolean=false;
   selectedClientId: number | null = null;  // To store client ID when updating
 
   constructor(private clientService: ClientService) {
-   
+
   }
   clientForm:FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -27,13 +27,13 @@ export class ClientComponent implements OnInit {
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^01[0152][0-9]{8}$/)])
   });
   ngOnInit() {
-   
-    this.GetClients();  
+
+    this.GetClients();
   }
 
   // Add a new client
   AddClient() {
-  
+
       this.clientService.AddClient(this.clientForm.value).subscribe({
         next: (response) => {
           alert('Client added successfully');
@@ -43,7 +43,7 @@ export class ClientComponent implements OnInit {
           alert('Error adding client');
         }
       });
-  
+
     }
 
   GetClients() {
@@ -55,7 +55,7 @@ export class ClientComponent implements OnInit {
       },
     );
   }
-  
+
 EditClient(client:any){
   this.clientId=client.id;
   this.isupdate=true;
@@ -73,11 +73,11 @@ Update(){
     },
     error:(error)=>{
       console.log(error);
-      
+
     }
   })
- 
-    
+
+
 }
   // Delete a client
   DeleteClient(clientId: number) {
@@ -91,10 +91,5 @@ Update(){
     });
   }
 
-  // // Reset the form and clear selected client ID
-  // ResetForm() {
-  //   this.clientForm.reset();
-  //   this.selectedClientId = null;
-  // }
 }
 

@@ -52,7 +52,7 @@
     <button type="submit" class="btn btn-primary" (click)="AddClient()">Add Client</button>
 
   }
-    
+
   </form>
 
 
@@ -65,8 +65,8 @@
         <th>Name</th>
         <th>Address</th>
         <th>Phone</th>
-        <th></th>
-        <th></th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -75,8 +75,8 @@
           <td>{{client.name}}</td>
           <td>{{client.address}}</td>
           <td>{{client.phoneNumber}}</td>
-          <td class="text-center"><i class="fa-solid fa-pen-to-square" (click)="EditClient(client)"></i></td>
-          <td class="text-center"><i class="fa-solid fa-delete-left" (click)="DeleteClient(client.id)"></i></td>
+          <td class="text-center"><i class="fa-solid fa-pen-to-square text-warning" (click)="EditClient(client)"></i></td>
+          <td class="text-center"><i class="fa-solid fa-delete-left text-danger" (click)="DeleteClient(client.id)"></i></td>
         </tr>
       }
     </tbody>
