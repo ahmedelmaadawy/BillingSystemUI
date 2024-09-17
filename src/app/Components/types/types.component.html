@@ -1,10 +1,18 @@
+<div>
+  <button class="btn btn-primary mx-5" routerLink="/types-list">
+    View All Types
+  </button>
+</div>
 <div class="container mt-5">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Types Form</h3>
     </div>
     <div class="card-body">
-      <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+      <form
+        [formGroup]="typeForm"
+        (ngSubmit)="isUpdate ? editType() : onSubmit()"
+      >
         <div class="form-group row mb-3">
           <label for="companyName" class="col-sm-3 col-form-label"
             >Company Name:</label
@@ -15,7 +23,9 @@
               formControlName="companyId"
               class="form-control"
             >
+              @if(!isUpdate){
               <option selected disabled>choose from Companies</option>
+              }
               <option
                 *ngFor="let company of companies"
                 value="{{ company.id }}"
