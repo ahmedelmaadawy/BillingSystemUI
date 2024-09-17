@@ -5,23 +5,38 @@
         <h3>Units</h3>
       </div>
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover  text-center">
       <thead>
         <tr>
           <td>Name</td>
-          <td class="text-center">Unit Details</td>
-          <td class="text-end">Actions</td>
+          <!-- <td class="text-center">Unit Details</td> -->
+          <td >Actions</td>
         </tr>
       </thead>
       <tbody>
-        <tr>
+
+        <!-- static Data -->
+        <!-- <tr>
           <td>unit 1</td>
           <td class="text-center">Lorem ipsum dolor sit amet.</td>
-          <td class="text-end">
-            <i class="fa-solid fa-edit" (click)="Edit()"></i>
-            <i class="fa-solid fa-delete-left" (click)="Delete()"></i>
+          <td >
+            <i class="fa-solid fa-edit EditIcon " (click)="Edit()"></i>
+            <i class="fa-solid fa-delete-left DeleteIcon" (click)="Delete()"></i>
+          </td>
+        </tr> -->
+
+
+        <!-- Dynamic Data -->
+        <tr *ngFor="let unit of UnitList">
+          <td>{{unit.name}}</td>
+          <td>
+            <!-- <i class="fa-solid fa-edit EditIcon" (click)="Edit(unit)" ></i> -->
+            <i class="fa-solid fa-edit EditIcon" [routerLink]="['/edit-unit',unit.id]" ></i>
+            <i class="fa-solid fa-delete-left DeleteIcon"  (click)="deleteProductHandler(unit.id)" ></i>
           </td>
         </tr>
+
+
       </tbody>
     </table>
   </div>

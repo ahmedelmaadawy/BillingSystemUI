@@ -37,3 +37,13 @@ tbody tr td i{
 .actions-buttons > *:not(:focus) {
     background-color: white;
 }
+
+tr td i{
+  display: inline-block;
+}
+.EditIcon{
+  color: rgb(0, 17, 209);
+}
+.DeleteIcon{
+  color: red;
+}

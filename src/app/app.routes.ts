@@ -24,7 +24,6 @@ export const routes: Routes = [
     component: CompanylistComponent,
     title: 'List of Companies',
   },
-
   { path: 'unit', component: UnitsComponent, title: 'Units' },
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
@@ -35,7 +34,8 @@ export const routes: Routes = [
     title: 'Salesreport',
   },
   { path: 'items', component: ItemComponent, title: 'Items' },
-  { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
+  { path: 'edit-unit/0', component: UnitFormComponent, title: 'UnitForm' },//************/
+  { path: 'edit-unit/:id', component: UnitFormComponent, title: 'UnitForm' },//*******/
   {
     path: 'storage-report',
     component: StorageReportComponent,
