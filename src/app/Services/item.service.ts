@@ -21,9 +21,9 @@ export class ItemService {
   {
     return this.httpClient.post<IItem>(`https://localhost:7156/api/Item`,item);
   }
-  editItem(item:IItem):Observable<IItem>
+  editItem(id:number,item:IItem):Observable<IItem>
   {
-    return this.httpClient.put<IItem>(`https://localhost:7156/api/Item`,item);
+    return this.httpClient.put<IItem>(`https://localhost:7156/api/Item/${id}`,item);
   }
   deleteItem(id :number)
   {

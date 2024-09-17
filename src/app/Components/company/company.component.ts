@@ -86,7 +86,7 @@ export class CompanyComponent implements OnInit{
   editCompany(){
     if (this.CompanyForm.valid) {
       this._companyService.editCompany(this.id , this.CompanyForm.value).subscribe({
-        next: (response) => {
+        next: (response:any) => {
           Swal.fire({
             title: 'Updated Successfully',
             icon: 'success',
@@ -94,7 +94,7 @@ export class CompanyComponent implements OnInit{
           });
           this.router.navigateByUrl('/company-list');
         },
-        error: (err) => {
+        error: (err:any) => {
           console.log(this.CompanyForm.value);
           console.log(err);
           Swal.fire({

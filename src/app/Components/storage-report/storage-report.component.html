@@ -12,15 +12,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let report of storageReport">
-          <td>{{ report.item }}</td>
-          <td>{{ report.quantity }}</td>
+        @for (report of storageReport; track report.id) {
+        <tr >
+          <td>{{ report.name }}</td>
+          <td>{{ report.availableQyantity }}</td>
           <td>{{ report.type }}</td>
-          <td>{{ report.companyName }}</td>
+          <td>{{ report.company }}</td>
           <td>{{ report.unit }}</td>
           <td>{{ report.sellingPrice }}</td>
-        </tr>
+        </tr>}
       </tbody>
     </table>
   </div>
-  

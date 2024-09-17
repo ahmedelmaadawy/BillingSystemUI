@@ -2,7 +2,7 @@ export interface IItem {
   id : number,
   name : string,
   note? : string,
-  availableQuantity : number,
+  availableQyantity: number,
   buyingPrice: number,
   sellingPrice : number,
   companyName?: string,

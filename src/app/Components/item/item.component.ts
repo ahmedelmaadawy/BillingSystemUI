@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CompanyServiceService } from './../../Services/company-service.service';
 import { ItemService } from './../../Services/item.service';
 import { TypeService } from './../../Services/type.service';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-item',standalone: true,
   templateUrl: './item.component.html',
-  imports:[ReactiveFormsModule,CommonModule],
+  imports:[ReactiveFormsModule,CommonModule,RouterLink,RouterLinkActive],
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
