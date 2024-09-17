@@ -1,39 +1,92 @@
-<div class="company">
-    <h3>Add New Company</h3>
-    <form [formGroup]="CompanyForm" (ngSubmit)="AddCompany()" >
-        <div class="item">
-             <p>Company Name</p>
-            <input formControlName="name" type="text" class="form-control" placeholder="Name" id="name">
-            @if (CompanyForm.get("name")?.errors && CompanyForm.get("name")?.touched) {
-                @if (CompanyForm.get("name")?.getError("required")) {
-                  <p class=" text-danger">Name is required</p>
-                }
-                @if (CompanyForm.get("name")?.getError("minlength")) {
-                  <p class=" text-danger">minLength is 3</p>
-                }
-                @if (CompanyForm.get("name")?.getError("maxlength")) {
-                  <p class=" text-danger">maxLength is 200</p>
-                }
-              }
-        </div>
-        <div class="item">
-            <p>Company details</p>
-            <input formControlName="note" type="text" class="form-control" placeholder="details" id="details">
-            @if (CompanyForm.get("note")?.errors && CompanyForm.get("note")?.touched) {
-                @if (CompanyForm.get("note")?.getError("required")) {
-                  <p class=" text-danger">details is required</p>
-                }
-                @if (CompanyForm.get("note")?.getError("minlength")) {
-                  <p class=" text-danger">minLength is 3</p>
-                }
-                @if (CompanyForm.get("note")?.getError("maxlength")) {
-                  <p class=" text-danger">maxLength is 20</p>
-                }
-              }
-        </div>
+<div>
+  <a routerLink="/company-list" class="btn btn-primary mb-3">Company List</a>
+</div>
 
-        <div class="Create">
-            <button>Create</button>
-        </div>
-    </form>
+<div class="company">
+  <!-- Use Angular *ngIf directive instead of @if -->
+  <h3 *ngIf="isUpdate; else addMode">Edit Company</h3>
+  <ng-template #addMode>
+    <h3>Add New Company</h3>
+  </ng-template>
+
+  <form
+    [formGroup]="CompanyForm"
+    (ngSubmit)="isUpdate ? editCompany() : AddCompany()"
+  >
+    <div class="item">
+      <p>Company Name</p>
+      <input
+        formControlName="name"
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        id="name"
+      />
+      <!-- Use Angular validation logic -->
+      <div
+        *ngIf="
+          CompanyForm.get('name')?.errors && CompanyForm.get('name')?.touched
+        "
+      >
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('name')?.getError('required')"
+        >
+          Name is required
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('name')?.getError('minlength')"
+        >
+          minLength is 3
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('name')?.getError('maxlength')"
+        >
+          maxLength is 200
+        </p>
+      </div>
+    </div>
+
+    <div class="item">
+      <p>Company details</p>
+      <input
+        formControlName="note"
+        type="text"
+        class="form-control"
+        placeholder="Details"
+        id="details"
+      />
+      <div
+        *ngIf="
+          CompanyForm.get('note')?.errors && CompanyForm.get('note')?.touched
+        "
+      >
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('note')?.getError('required')"
+        >
+          Details are required
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('note')?.getError('minlength')"
+        >
+          minLength is 3
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="CompanyForm.get('note')?.getError('maxlength')"
+        >
+          maxLength is 20
+        </p>
+      </div>
+    </div>
+
+    <div class="Create">
+      <!-- Conditional button text -->
+      <button type="submit">{{ isUpdate ? "Update" : "Create" }}</button>
+    </div>
+  </form>
 </div>
