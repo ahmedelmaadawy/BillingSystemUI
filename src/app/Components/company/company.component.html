@@ -2,7 +2,7 @@
     <h3>Add New Company</h3>
     <form [formGroup]="CompanyForm" (ngSubmit)="AddCompany()" >
         <div class="item">
-             <p>Company Name</p>
+            <p>Company Name</p>
             <input formControlName="name" type="text" class="form-control" placeholder="Name" id="name">
             @if (CompanyForm.get("name")?.errors && CompanyForm.get("name")?.touched) {
                 @if (CompanyForm.get("name")?.getError("required")) {
@@ -16,6 +16,7 @@
                 }
               }
         </div>
+        
         <div class="item">
             <p>Company details</p>
             <input formControlName="note" type="text" class="form-control" placeholder="details" id="details">

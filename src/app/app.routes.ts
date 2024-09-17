@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
   { path: 'company', component: CompanyComponent, title: 'Company' },
-  { path: 'unit', component: UnitsComponent, title: 'Units' },
+  { path: 'unit', component: UnitsComponent, title: 'Units' },//*******/
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types', component: TypesComponent, title: 'Types' },
@@ -28,7 +28,8 @@ export const routes: Routes = [
     title: 'Salesreport',
   },
   { path: 'items', component: ItemComponent, title: 'Items' },
-  { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
+  { path: 'edit-unit/0', component: UnitFormComponent, title: 'UnitForm' },//************/
+  { path: 'edit-unit/:id', component: UnitFormComponent, title: 'UnitForm' },//*******/
   {
     path: 'storage-report',
     component: StorageReportComponent,
