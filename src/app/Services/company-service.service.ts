@@ -11,7 +11,9 @@ export class CompanyServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getAllCompanies():Observable<ICompany[]> {
-    return this.httpClient.get<ICompany[]>(`https://localhost:44357/api/Company`);
+    return this.httpClient.get<ICompany[]>(
+      `https://localhost:44357/api/Company`
+    );
   }
 
 
@@ -19,7 +21,8 @@ export class CompanyServiceService {
     return this.httpClient.get<ICompany>(
       `https://localhost:44357/api/Company/${id}`
     );
-   }
+  }
+
   addCompany(company: ICompany):Observable<ICompany> {
     return  this.httpClient.post<ICompany>(`https://localhost:44357/api/Company`,company);
    }
@@ -28,7 +31,9 @@ export class CompanyServiceService {
     return this.httpClient.put<any>(`https://localhost:44357/api/Company/${id}`, company);
   }
   deleteCompany(id: number) {
-    return this.httpClient.delete<void>(`https://localhost:44357/api/Company/${id}`);
+    return this.httpClient.delete<void>(
+      `https://localhost:44357/api/Company/${id}`
+    );
   }
 
 }

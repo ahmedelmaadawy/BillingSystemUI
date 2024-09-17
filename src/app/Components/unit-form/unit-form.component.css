@@ -22,12 +22,32 @@ h3{
   margin: 0 auto 30px auto;
 }
 
-.submit{
-  display: block;
+.btns{
+  display: flex;
+  justify-content: space-evenly;
   margin: 50px auto 10px auto ;
+
+}
+
+.submit{
+  /* display: flex; */
   background-color: #2babbf;
   color: white;
 }
+
+.goToList{
+  background-color: #040035;
+  color: white;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.goToList i{
+  margin: 0 10px 0 0;
+}
+
+
 
 textarea{
   display: block;

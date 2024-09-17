@@ -1,22 +1,41 @@
 <div class="container">
-  <form action="">
+  <form [formGroup]="UnitForm"
+  (ngSubmit)="UnitId ? EditUnit() : AddUnit()"
+  >
       <h3>Unit Information</h3>
       <div class="undeline"></div>
-      <!-- <div class="mb-3">
-          <label for="UnitId" class="form-label">ID</label>
-          <input type="number" class="form-control" id="UnitId" required >
-      </div> -->
+
+      <!-- chnging "UnitName" into "name" to be suitable for api -->
       <div class="mb-3">
-          <label for="UnitName" class="form-label">Unit Name</label>
-          <input type="text" class="form-control" id="UnitName" name="UnitName" required>
+          <label for="name" class="form-label"> Unit Name</label>
+          @if(selectedUnit?.id!=0){
+            <input type="text"  formControlName="name"  class="form-control" id="name" name="name" value="{{selectedUnit?.name}}" required>
+          }@else {
+            <input type="text"  formControlName="name"  class="form-control" id="name" name="name" required>
+          }
+          @if (UnitForm.get("name")?.errors && UnitForm.get("name")?.touched) {
+            @if (UnitForm.get("name")?.getError("required")) {
+              <p class=" text-danger">Name is required</p>
+            }
+            @if (UnitForm.get("name")?.getError("minlength")) {
+              <p class=" text-danger">Minimum Number of words is 3</p>
+            }
+            @if (UnitForm.get("name")?.getError("maxlength")) {
+              <p class=" text-danger">Maximum Number of words is 200</p>
+            }
+          }
+        </div>
+
+      <div class="btns">
+        <!-- <input type="submit" [value]="UnitId == 0 ? 'Add Unit' : 'Update Unit'" class="btn submit"> -->
+        <button type="submit" class="btn submit" >{{!isUpdate ? 'Add Unit' : 'Update Unit'}} </button>
       </div>
 
-      <div class="mb-3">
-          <label for="UnitNotes" class="form-label">Notes</label>
-          <textarea id="UnitNotes" class="form-control" name="UnitNotes"  placeholder="Enter your Notes here..."></textarea>
-      </div>
-
-      <input type="submit" value="Add Unit" class="btn submit">
   </form>
+
 </div>
+
+<button type="button" class="btn goToList " routerLink="/unit">
+  <i class="fa-solid fa-eye "></i> View All Units
+</button>
 
