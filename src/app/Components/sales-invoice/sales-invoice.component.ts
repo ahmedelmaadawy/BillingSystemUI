@@ -1,7 +1,12 @@
 import { InvoiceServiceService } from './../../Services/service-invoice.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { IItemInvoice, IInvoice } from '../../Models/IInvoice';
 
 @Component({
@@ -16,7 +21,10 @@ export class SalesInvoiceComponent {
   itemForm: FormGroup;
   addedItems: Array<IItemInvoice> = [];
 
-  constructor(private fb: FormBuilder, private invoiceService: InvoiceServiceService) {
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceServiceService
+  ) {
     // Initialize the form with form groups
     this.salesInvoiceForm = this.fb.group({
       billsDate: ['', Validators.required],
@@ -52,12 +60,12 @@ export class SalesInvoiceComponent {
 
   // Submit the form and bundle items with the invoice
   submitForm() {
-    if (this.salesInvoiceForm.valid) {
+    // if (this.salesInvoiceForm.valid) {
       const invoice: IInvoice = {
         ...this.salesInvoiceForm.value,
         items: this.addedItems,
       };
-
+      console.log(invoice);
       this.invoiceService.postInvoice(invoice).subscribe(
         (response) => {
           console.log('Invoice submitted successfully:', response);
@@ -69,6 +77,8 @@ export class SalesInvoiceComponent {
           console.error('Error submitting invoice:', error);
         }
       );
-    }
+    // } else {
+    //   alert('form invalid');
+    // }
   }
 }
