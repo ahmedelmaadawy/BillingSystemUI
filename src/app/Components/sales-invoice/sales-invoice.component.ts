@@ -1,6 +1,8 @@
+import { InvoiceServiceService } from './../../Services/service-invoice.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { IItemInvoice, IInvoice } from '../../Models/IInvoice';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -10,31 +12,63 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./sales-invoice.component.css'],
 })
 export class SalesInvoiceComponent {
-  requestForm: FormGroup;
-  addedItems = [
-    {
-      code: '',
-      name: '',
-      quantity: '',
-      unit: '',
-      sellingPrice: '',
-      discount: '',
-      total: '',
-      balance: '',
-    },
-  ];
-  constructor(private fb: FormBuilder) {
-    this.requestForm = this.fb.group({
-      employeeName: [''],
-      date: [''],
-      startTime: [''],
-      endTime: [''],
+  salesInvoiceForm: FormGroup;
+  itemForm: FormGroup;
+  addedItems: Array<IItemInvoice> = [];
+
+  constructor(private fb: FormBuilder, private invoiceService: InvoiceServiceService) {
+    // Initialize the form with form groups
+    this.salesInvoiceForm = this.fb.group({
+      billsDate: ['', Validators.required],
+      billsNumber: ['', Validators.required],
+      clientName: ['', Validators.required],
+      billsTotal: ['', Validators.required],
+      percentageDiscount: [''],
+      valueDiscount: [''],
+      theNet: ['', Validators.required],
+      paidUp: ['', Validators.required],
+      theRest: ['', Validators.required],
+    });
+
+    // Item form
+    this.itemForm = this.fb.group({
+      code: ['', Validators.required],
+      name: ['', Validators.required],
+      unit: ['', Validators.required],
+      quantity: ['', Validators.required],
+      sellingPrice: ['', Validators.required],
+      discount: ['', Validators.required],
+      total: ['', Validators.required],
+      balance: ['', Validators.required],
     });
   }
 
-  onSave() {}
+  // Add item to the list
+  addItem() {
+    const item = this.itemForm.value as IItemInvoice;
+    this.addedItems.push(item);
+    this.itemForm.reset();
+  }
 
-  resetForm() {
-    this.requestForm.reset();
+  // Submit the form and bundle items with the invoice
+  submitForm() {
+    if (this.salesInvoiceForm.valid) {
+      const invoice: IInvoice = {
+        ...this.salesInvoiceForm.value,
+        items: this.addedItems,
+      };
+
+      this.invoiceService.postInvoice(invoice).subscribe(
+        (response) => {
+          console.log('Invoice submitted successfully:', response);
+          // Optionally to reset the form and item list after submission
+          this.salesInvoiceForm.reset();
+          this.addedItems = [];
+        },
+        (error) => {
+          console.error('Error submitting invoice:', error);
+        }
+      );
+    }
   }
 }
