@@ -9,7 +9,7 @@
         <div class="form-group row mb-3">
           <label for="companyName" class="col-sm-3 col-form-label">Company Name:</label>
           <div class="col-sm-9">
-            <select id="companyName" formControlName="companyName" class="form-control">
+            <select id="companyName" formControlName="companyId" class="form-control">
               <option value="">Choose from Companies</option>
               <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
             </select>
@@ -20,7 +20,7 @@
         <div class="form-group row mb-3">
           <label for="typeName" class="col-sm-3 col-form-label">Type Name:</label>
           <div class="col-sm-9">
-            <select id="typeName" formControlName="typeName" class="form-control">
+            <select id="typeName" formControlName="typeId" class="form-control">
               <option value="">Choose from Types</option>
               <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
             </select>
@@ -63,9 +63,9 @@
         <div class="form-group row mb-3">
           <label for="unit" class="col-sm-3 col-form-label">Unit Name:</label>
           <div class="col-sm-9">
-            <select id="unit" formControlName="unit" class="form-control">
+            <select id="unit" formControlName="unitId" class="form-control">
               <option value="">Choose from Units</option>
-              <!-- <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option> -->
+              <option *ngFor="let unit of units" [value]="unit.id">{{ unit.name }}</option>
             </select>
           </div>
         </div>
@@ -83,7 +83,7 @@
           <div class="col-sm-9 offset-sm-3">
             <button type="submit" class="btn btn-success me-2" [disabled]="!ItemForm.valid"><i class="fa fa-save"></i> Save</button>
             <button type="button" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
-            <button id="list"  class="btn btn-primary"><a routerLink="" >view all Items</a></button>
+            <button id="list"  class="btn btn-primary"><a routerLink="" style="color:white;text-decoration: none;">view all Items</a></button>
           </div>
         </div>
       </form>

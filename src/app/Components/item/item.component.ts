@@ -1,3 +1,4 @@
+import { UnitService } from './../../Services/unit.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -8,6 +9,8 @@ import { ICompany } from './../../Models/ICompany';
 import { IType } from './../../Models/IType';
 import { IItem } from './../../Models/IItem';
 import { CommonModule } from '@angular/common';
+import { IUnit } from '../../Models/iunit';
+import { error } from 'console';
 
 @Component({
   selector: 'app-item',standalone: true,
@@ -19,30 +22,32 @@ export class ItemComponent implements OnInit {
   ItemForm: FormGroup;
   companies: ICompany[] = [];
   types: IType[] = [];
-
+  units :IUnit[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private itemService: ItemService,
     private companyService: CompanyServiceService,
-    private typeService: TypeService
+    private typeService: TypeService,
+    private UnitService: UnitService
   ) {
     this.ItemForm = this.formBuilder.group({
-      companyName: ['', Validators.required],
-      typeName: ['', Validators.required],
+      companyId: ['', Validators.required],
+      typeId: ['', Validators.required],
       name: ['', Validators.required],
       availableQuantity: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       buyingPrice: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
       sellingPrice: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
-      unit: ['', Validators.required],
+      unitId: ['', Validators.required],
       notes: [''],
-      unitName:['',Validators.required]
+
     });
   }
 
   ngOnInit(): void {
     this.loadCompanies();
     this.loadTypes();
+    this.loadUnits();
   }
 
   loadCompanies(): void {
@@ -59,11 +64,32 @@ export class ItemComponent implements OnInit {
     );
   }
 
+  loadUnits():void{
+
+    this.UnitService.getAllUnits().subscribe(
+      (units:IUnit[]) => this.units=units  ,
+      error => console.error('Error loading units',error)
+    );
+  }
   onSubmit(): void {
     if (this.ItemForm.valid) {
-      const newItem: IItem = this.ItemForm.value;
+      // Map form values to the IItem structure
+      const newItem: IItem = {
+        ...this.ItemForm.value,
+        companyId: +this.ItemForm.value.companyId,  // Ensure IDs are numbers
+        typeId: +this.ItemForm.value.typeId,
+        unitId: +this.ItemForm.value.unitId,
+        availableQuantity: +this.ItemForm.value.availableQuantity,
+        buyingPrice: +this.ItemForm.value.buyingPrice,
+        sellingPrice: +this.ItemForm.value.sellingPrice
+      };
+      console.log('Saving item:', newItem);
       this.itemService.addItem(newItem).subscribe(
-        () => this.router.navigate(['/items']),
+        () => {
+          console.log('Item added successfully');
+          this.router.navigate(['/items']);
+          this.ItemForm.reset();  // Reset form after successful submission
+        },
         error => console.error('Error saving item:', error)
       );
     }

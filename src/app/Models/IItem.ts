@@ -10,5 +10,5 @@ export interface IItem {
   unitName?: string
   companyId : number,
   typeId : number,
-  UnitId : number
+  unitId : number
 }
