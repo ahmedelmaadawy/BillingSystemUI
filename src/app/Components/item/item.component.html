@@ -4,74 +4,89 @@
       <h3 class="card-title">Items Form</h3>
     </div>
     <div class="card-body">
-      <form >
+      <form [formGroup]="ItemForm" (ngSubmit)="onSubmit()">
+        <!-- Company Name -->
         <div class="form-group row mb-3">
           <label for="companyName" class="col-sm-3 col-form-label">Company Name:</label>
           <div class="col-sm-9">
-            <select id="companyName" formControlName="companyName" class="form-control">
-              <option value="">choose from Companies</option>
-              <option *ngFor="let company of companies">{{ company }}</option>
+            <select id="companyName" formControlName="companyId" class="form-control">
+              <option value="">Choose from Companies</option>
+              <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
             </select>
           </div>
         </div>
 
+        <!-- Type Name -->
         <div class="form-group row mb-3">
-          <label for="typeName" class="col-sm-3 col-form-label">type Name:</label>
+          <label for="typeName" class="col-sm-3 col-form-label">Type Name:</label>
           <div class="col-sm-9">
-            <select id="typeName" formControlName="typeName" class="form-control">
-              <option value="">choose from Types</option>
-              <option *ngFor="let type of types">{{ type }}</option>
+            <select id="typeName" formControlName="typeId" class="form-control">
+              <option value="">Choose from Types</option>
+              <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
             </select>
           </div>
         </div>
+
+        <!-- Name -->
         <div class="form-group row mb-3">
-          <label for="Name" class="col-sm-3 col-form-label">Name:</label>
+          <label for="name" class="col-sm-3 col-form-label">Name:</label>
           <div class="col-sm-9">
-            <textarea id="Name" formControlName="Name"  class="form-control" placeholder="Enter item name"></textarea>
+            <textarea id="name" formControlName="name" class="form-control" placeholder="Enter item name"></textarea>
           </div>
         </div>
+
+        <!-- Available Quantity -->
         <div class="form-group row mb-3">
-          <label for="availableQuantity" class="col-sm-3 col-form-label">available Quantity:</label>
+          <label for="availableQuantity" class="col-sm-3 col-form-label">Available Quantity:</label>
           <div class="col-sm-9">
-            <textarea id="availableQuantity" formControlName="availableQuantity"  class="form-control" placeholder="Enter available Quantity"></textarea>
+            <textarea id="availableQuantity" formControlName="availableQuantity" class="form-control" placeholder="Enter available quantity"></textarea>
           </div>
         </div>
+
+        <!-- Buying Price -->
         <div class="form-group row mb-3">
-          <label for="buyingprice" class="col-sm-3 col-form-label">buying price:</label>
+          <label for="buyingPrice" class="col-sm-3 col-form-label">Buying Price:</label>
           <div class="col-sm-9">
-            <textarea id="buyingprice" formControlName="buyingprice"  class="form-control" placeholder="Enter buying price"></textarea>
+            <textarea id="buyingPrice" formControlName="buyingPrice" class="form-control" placeholder="Enter buying price"></textarea>
           </div>
         </div>
+
+        <!-- Selling Price -->
         <div class="form-group row mb-3">
-          <label for="sellingprice" class="col-sm-3 col-form-label">selling price:</label>
+          <label for="sellingPrice" class="col-sm-3 col-form-label">Selling Price:</label>
           <div class="col-sm-9">
-            <textarea id="sellingprice" formControlName="sellingprice"  class="form-control" placeholder="Enter selling price"></textarea>
+            <textarea id="sellingPrice" formControlName="sellingPrice" class="form-control" placeholder="Enter selling price"></textarea>
           </div>
         </div>
+
+        <!-- Unit -->
         <div class="form-group row mb-3">
-          <label for="unit" class="col-sm-3 col-form-label">unit Name:</label>
+          <label for="unit" class="col-sm-3 col-form-label">Unit Name:</label>
           <div class="col-sm-9">
-            <select id="unit" formControlName="unit" class="form-control">
-              <option value="">choose from units</option>
-              <option *ngFor="let unit of units">{{ unit }}</option>
+            <select id="unit" formControlName="unitId" class="form-control">
+              <option value="">Choose from Units</option>
+              <option *ngFor="let unit of units" [value]="unit.id">{{ unit.name }}</option>
             </select>
           </div>
         </div>
+
+        <!-- Notes -->
         <div class="form-group row mb-3">
           <label for="notes" class="col-sm-3 col-form-label">Notes:</label>
           <div class="col-sm-9">
-            <textarea id="notes" formControlName="notes" rows="3" class="form-control" placeholder="Enter Notes"></textarea>
+            <textarea id="notes" formControlName="notes" rows="3" class="form-control" placeholder="Enter notes"></textarea>
           </div>
         </div>
 
+        <!-- Buttons -->
         <div class="form-group row">
           <div class="col-sm-9 offset-sm-3">
-            <button type="submit" class="btn btn-success me-2"><i class="fa fa-save"></i> Save</button>
+            <button type="submit" class="btn btn-success me-2" [disabled]="!ItemForm.valid"><i class="fa fa-save"></i> Save</button>
             <button type="button" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
+            <button id="list"  class="btn btn-primary"><a routerLink="" style="color:white;text-decoration: none;">view all Items</a></button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
-

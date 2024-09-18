@@ -1,19 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { IItem } from './../../Models/IItem';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ItemService } from '../../Services/item.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-storage-report',
+  imports:[CommonModule],
+  standalone:true,
   templateUrl: './storage-report.component.html',
   styleUrls: ['./storage-report.component.css']
 })
 export class StorageReportComponent implements OnInit {
-  storageReport = [
-    { item: 'Item 1', quantity: 20, type: 'Type A', companyName: 'Company A', unit: 'Unit A', sellingPrice: 50 },
-    { item: 'Item 2', quantity: 15, type: 'Type B', companyName: 'Company B', unit: 'Unit B', sellingPrice: 100 },
-    // إضافة المزيد من العناصر حسب الحاجة
-  ];
 
-  constructor() { }
+
+  storageReport :any=[];
+
+  constructor( private router: Router, private itemService: ItemService)
+  {
+
+  }
 
   ngOnInit(): void {
+    this.itemService.getAllItems().subscribe({
+      next: (response) => {
+        this.storageReport = response;
+        console.log(this.storageReport);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
   }
 }
