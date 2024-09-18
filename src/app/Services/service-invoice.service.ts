@@ -1,43 +1,52 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IInvoice } from '../Models/IInvoice';
-import { IItemInvoice } from '../Models/IInvoice';
+import { IInvoice ,IItemInvoice} from '../Models/IInvoice';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InvoiceServiceService {
+  private apiUrl = 'https://localhost:7156/api/invoices';
 
-  private baseUrl = 'https://localhost:44357/api/Invoice';
+  constructor(private http: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
+  // Post the invoice data to the backend
+  postInvoice(invoice: IInvoice): Observable<any> {
+    return this.http.post<any>(this.apiUrl, invoice);
+  }
+  // Get all invoices
   getAllInvoices(): Observable<IInvoice[]> {
-    return this.httpClient.get<IInvoice[]>(`${this.baseUrl}`);
+    return this.http.get<IInvoice[]>(`${this.apiUrl}`);
   }
 
+  // Get invoice by ID
   getInvoiceById(id: number): Observable<IInvoice> {
-    return this.httpClient.get<IInvoice>(`${this.baseUrl}/${id}`);
+    return this.http.get<IInvoice>(`${this.apiUrl}/${id}`);
   }
 
-  addInvoice(invoice: IInvoice): Observable<IInvoice> {
-    return this.httpClient.post<IInvoice>(`${this.baseUrl}`, invoice);
+  // Add a new invoice
+  addInvoice(invoice: IInvoice): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, invoice);
   }
 
-  editInvoice(id: number, invoice: IInvoice): Observable<IInvoice> {
-    return this.httpClient.put<IInvoice>(`${this.baseUrl}/${id}`, invoice);
+  // Edit an existing invoice by ID
+  editInvoice(id: number, invoice: IInvoice): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, invoice);
   }
 
+  // Delete an invoice by ID
   deleteInvoice(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  addItemToInvoice(itemInvoice: IItemInvoice): Observable<IItemInvoice> {
-    return this.httpClient.post<IItemInvoice>(`${this.baseUrl}/item`, itemInvoice);
+  // Add an item to an invoice
+  addItemToInvoice(itemInvoice: IItemInvoice): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/item`, itemInvoice);
   }
 
+  // Delete an item from an invoice by item ID
   deleteItemFromInvoice(itemInvoiceId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseUrl}/item/${itemInvoiceId}`);
+    return this.http.delete<void>(`${this.apiUrl}/item/${itemInvoiceId}`);
   }
 }
