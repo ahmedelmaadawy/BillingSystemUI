@@ -7,12 +7,14 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
 import { HomeComponent } from './Components/home/home.component';
 
 import { ClientComponent } from './Components/client/client.component';
+
 import { EmployeeComponent } from './Components/employee/employee.component';
 import { UnitFormComponent } from './Components/unit-form/unit-form.component';
 
 import { TypesComponent } from './Components/types/types.component';
 import { SalesreportComponent } from './Components/salesreport/salesreport.component';
 import { ItemComponent } from './Components/item/item.component';
+import { ClientListComponent } from './Components/client-list/client-list.component';
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
 export const routes: Routes = [
@@ -26,8 +28,11 @@ export const routes: Routes = [
     title: 'List of Companies',
   },
   { path: 'unit', component: UnitsComponent, title: 'Units' },
+
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
+  { path: 'types', component: TypesComponent, title: 'Types' },
+  { path: 'client-list', component: ClientListComponent, title: 'ClientList' },
   { path: 'types/:id', component: TypesComponent, title: 'Types' },
   { path: 'types-list', component: TypesListComponent, title: 'Types' },
 

@@ -25,11 +25,14 @@ input:focus{
 .item{
     margin: 20px 0;
 }
-button{
+button ,a{
     outline: none;
     border: none;
     background-color: #59B4C3;
     color: white;
     padding: 5px 15px;
     border-radius: 8px;
+}
+a{
+  text-decoration: none;
 }
