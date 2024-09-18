@@ -20,4 +20,15 @@ export class TypeService {
       type
     );
   }
+  editType(id: number, type: IType): Observable<any> {
+    return this.httpClient.put<any>(
+      `https://localhost:44357/api/type/${id}`,
+      type
+    );
+  }
+  deleteType(id: number) {
+    return this.httpClient.delete<void>(
+      `https://localhost:44357/api/type/${id}`
+    );
+  }
 }
