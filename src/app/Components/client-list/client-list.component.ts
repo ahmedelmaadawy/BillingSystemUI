@@ -1,17 +1,5 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-client-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './client-list.component.html',
-  styleUrl: './client-list.component.css'
-})
-export class ClientListComponent {
-
-}
 import { routes } from './../../app.routes';
-import { DataTransferService } from './../../Services/data-transfer.service';
+import { DataTransferService } from '../../Services/data-transfer.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../Services/client.service';
 import { IClient } from '../../Models/IClient';
