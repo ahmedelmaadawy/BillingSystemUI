@@ -66,6 +66,7 @@ export class ClientComponent implements OnInit {
         next:(response)=>{
           this.isupdate=false;
           this.reouter.navigate(["/client-list"]);
+          this.data.SetClientObj(null);
         },
         error:(error)=>{
           console.log(error);
