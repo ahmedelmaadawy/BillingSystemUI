@@ -1,0 +1,18 @@
+<form class="col-3" [formGroup]="LoginForm">
+  <h2 class="text-center">Login</h2>
+  <label class="userName"  for="userName" >
+    <i class="fa-solid fa-user" ></i>
+    <input formControlName="userName" type="text" class="form-control" id="userName"  required placeholder="Enter User Name">
+  </label>
+  <div *ngIf="LoginForm.get('userName')?.invalid && LoginForm.get('userName')?.touched" class="text-danger">
+    <b>Username is required.</b>
+  </div>
+  <div class="password">
+    <i class="fa-solid fa-lock"></i>
+    <input formControlName="password" type="password" class="form-control" required placeholder="Enter your password">
+  </div>
+  <div *ngIf="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched" class="text-danger">
+    <b>Password is required.</b>
+  </div>
+  <button class="btn btn-primary">Login</button>
+</form>
