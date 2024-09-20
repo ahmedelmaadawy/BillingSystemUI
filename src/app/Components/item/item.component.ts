@@ -89,14 +89,14 @@ export class ItemComponent implements OnInit {
         sellingPrice: +this.ItemForm.value.sellingPrice
       };
       console.log('Saving item:', newItem);
-      this.itemService.addItem(newItem).subscribe(
-        () => {
+      this.itemService.addItem(newItem).subscribe({
+        next: () => {
           console.log('Item added successfully');
           this.router.navigate(['/items']);
           this.ItemForm.reset();  // Reset form after successful submission
         },
-        error => console.error('Error saving item:', error)
-      );
+        error :(error)=> console.error('Error saving item:', error)
+      });
     }
   }
 }
