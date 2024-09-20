@@ -15,35 +15,23 @@ import { TypesComponent } from './Components/types/types.component';
 import { SalesreportComponent } from './Components/salesreport/salesreport.component';
 import { ItemComponent } from './Components/item/item.component';
 import { ClientListComponent } from './Components/client-list/client-list.component';
-import { CompanylistComponent } from './Components/companylist/companylist.component';
-import { TypesListComponent } from './Components/types-list/types-list.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
-  { path: 'company/:id', component: CompanyComponent, title: 'Company' },
-  {
-    path: 'company-list',
-    component: CompanylistComponent,
-    title: 'List of Companies',
-  },
+  { path: 'company', component: CompanyComponent, title: 'Company' },
   { path: 'unit', component: UnitsComponent, title: 'Units' },
-
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types', component: TypesComponent, title: 'Types' },
-  { path: 'client-list', component: ClientListComponent, title: 'ClientList' },
-  { path: 'types/:id', component: TypesComponent, title: 'Types' },
-  { path: 'types-list', component: TypesListComponent, title: 'Types' },
-
+  {path:'client-list',component:ClientListComponent,title:'ClientList'},
   {
     path: 'salesreport',
     component: SalesreportComponent,
     title: 'Salesreport',
   },
   { path: 'items', component: ItemComponent, title: 'Items' },
-  { path: 'edit-unit/0', component: UnitFormComponent, title: 'UnitForm' }, //************/
-  { path: 'edit-unit/:id', component: UnitFormComponent, title: 'UnitForm' }, //*******/
+  { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
   {
     path: 'storage-report',
     component: StorageReportComponent,

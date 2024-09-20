@@ -1,5 +1,5 @@
 import { routes } from './../../app.routes';
-import { DataTransferService } from './../../Services/data-transfer.service';
+import { DataTransferService } from '../../Services/data-transfer.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../Services/client.service';
 import { IClient } from '../../Models/IClient';
