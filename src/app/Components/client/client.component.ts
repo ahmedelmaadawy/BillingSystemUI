@@ -12,14 +12,14 @@ import { Router } from '@angular/router';
   styleUrl: './client.component.css'
 })
 export class ClientComponent implements OnInit {
-  
+
   clients: IClient[] = [];  // To store the list of clients
   clientId:number=0;
   isupdate:boolean=false;
   selectedClientId: number | null = null;  // To store client ID when updating
 
   constructor(private clientService: ClientService,private data:DataTransferService,private reouter:Router) {
-   
+
   }
   isclient:IClient|null=null;
   clientForm:FormGroup = new FormGroup({
@@ -28,13 +28,13 @@ export class ClientComponent implements OnInit {
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^01[0152][0-9]{8}$/)])
   });
   ngOnInit() {
-    this.data.GetClientObj().subscribe({ 
+    this.data.GetClientObj().subscribe({
       next:(response)=>{
         if(response==null){
           this.isclient=null;
         }
         else{
-          this.isupdate=true; 
+          this.isupdate=true;
           this.clientId=response.id;
           this.clientForm.patchValue({
             name: response?.name,
@@ -48,18 +48,18 @@ export class ClientComponent implements OnInit {
 
   // Add a new client
   AddClient() {
-  
+
       this.clientService.AddClient(this.clientForm.value).subscribe({
         next: (response) => {
           this.reouter.navigate(["/client-list"]);
           alert('Client added successfully');
-          
+
                  },
         error: (error) => {
           alert('Error adding client');
         }
       });
-  
+
     }
     Update(){
       this.clientService.UpdateClient(this.clientId,this.clientForm.value).subscribe({
@@ -70,18 +70,13 @@ export class ClientComponent implements OnInit {
         },
         error:(error)=>{
           console.log(error);
-          
+
         }
       })
-     
-        
+
+
     }
     ShowList(){
       this.reouter.navigate(["/client-list"]);
     }
-  // // Reset the form and clear selected client ID
-  // ResetForm() {
-  //   this.clientForm.reset();
-  //   this.selectedClientId = null;
-  // }
 }
