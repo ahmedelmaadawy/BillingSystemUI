@@ -27,11 +27,11 @@
           </div>
           <div class="col-md-4 mb-3">
             <label for="clientName">Client Name:</label>
-            <select id="clientName" class="form-control" formControlName="clientName">
+            <select id="clientName" class="form-control" formControlName="clientName" >
               <option value="">Choose From Clients</option>
-              <!-- <option *ngFor="let client of clients" [value]="client.id">
+              <option *ngFor="let client of clients" [value]="client.id">
                 {{ client.name }}
-              </option> -->
+              </option>
             </select>
           </div>
         </div>
@@ -191,7 +191,7 @@
                 <input type="time" id="startTime" formControlName="startTime" class="form-control">
               </div>
 
-              
+
               <div class="col-md-6">
                 <label for="endTime" class="form-label">End Time</label>
                 <input type="time" id="endTime" formControlName="endTime" class="form-control">

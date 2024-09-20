@@ -1,6 +1,7 @@
+import { response } from 'express';
 import { InvoiceServiceService } from './../../Services/service-invoice.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +9,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { IItemInvoice, IInvoice } from '../../Models/IInvoice';
+import { IClient } from '../../Models/IClient';
+import { ClientService } from '../../Services/client.service';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -16,14 +19,16 @@ import { IItemInvoice, IInvoice } from '../../Models/IInvoice';
   templateUrl: './sales-invoice.component.html',
   styleUrls: ['./sales-invoice.component.css'],
 })
-export class SalesInvoiceComponent {
+export class SalesInvoiceComponent implements OnInit {
   salesInvoiceForm: FormGroup;
   itemForm: FormGroup;
   addedItems: Array<IItemInvoice> = [];
+  clients?: IClient[];
 
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceServiceService
+    ,private _clientService:ClientService
   ) {
     // Initialize the form with form groups
     this.salesInvoiceForm = this.fb.group({
@@ -48,6 +53,13 @@ export class SalesInvoiceComponent {
       discount: ['', Validators.required],
       total: ['', Validators.required],
       balance: ['', Validators.required],
+    });
+  }
+  ngOnInit(): void {
+    this._clientService.GetClients().subscribe({
+      next: (response) => {
+        this.clients = response;
+      }
     });
   }
 

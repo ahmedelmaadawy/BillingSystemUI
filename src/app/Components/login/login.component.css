@@ -1,5 +1,5 @@
 form{
-  background-color: #2babbf;
+  background-color: white;
   height: 500px;
   padding: 30px;
   border-radius: 10px;
@@ -25,12 +25,13 @@ input{
   font-size: 20px;
   outline: none;
   border: none;
-
+background-color: #edeef2;
 }
 input:focus {
   outline: none;        /* Removes the blue outline */
   box-shadow: none;     /* Removes any shadow */
   border: none;
+background-color: #edeef2;
 }
 
 .userName,.password{
