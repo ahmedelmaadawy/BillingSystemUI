@@ -1,7 +1,7 @@
 import { UnitService } from './../../Services/unit.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CompanyServiceService } from './../../Services/company-service.service';
 import { ItemService } from './../../Services/item.service';
 import { TypeService } from './../../Services/type.service';
@@ -15,7 +15,7 @@ import { error } from 'console';
 @Component({
   selector: 'app-item',standalone: true,
   templateUrl: './item.component.html',
-  imports:[ReactiveFormsModule,CommonModule,RouterLink,RouterLinkActive],
+  imports:[ReactiveFormsModule,CommonModule,RouterLink,RouterLinkActive,FormsModule],
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
@@ -23,13 +23,16 @@ export class ItemComponent implements OnInit {
   companies: ICompany[] = [];
   types: IType[] = [];
   units :IUnit[] = [];
+  id: number = 0;
+  isUpdate: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private itemService: ItemService,
     private companyService: CompanyServiceService,
     private typeService: TypeService,
-    private UnitService: UnitService
+    private UnitService: UnitService,
+    private route :ActivatedRoute
   ) {
     this.ItemForm = this.formBuilder.group({
       companyId: ['', Validators.required],
@@ -42,9 +45,11 @@ export class ItemComponent implements OnInit {
       notes: [''],
 
     });
+
   }
 
   ngOnInit(): void {
+    
     this.loadCompanies();
     this.loadTypes();
     this.loadUnits();
@@ -79,7 +84,7 @@ export class ItemComponent implements OnInit {
         companyId: +this.ItemForm.value.companyId,  // Ensure IDs are numbers
         typeId: +this.ItemForm.value.typeId,
         unitId: +this.ItemForm.value.unitId,
-        availableQuantity: +this.ItemForm.value.availableQuantity,
+        availableQyantity: +this.ItemForm.value.availableQuantity        ,
         buyingPrice: +this.ItemForm.value.buyingPrice,
         sellingPrice: +this.ItemForm.value.sellingPrice
       };

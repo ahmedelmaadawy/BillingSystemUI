@@ -8,6 +8,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.component';
 import { ItemComponent } from './Components/item/item.component';
 import { UnitsComponent } from './Components/units/units.component';
+import { ItemsListComponent } from './Components/items-list/items-list.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { UnitsComponent } from './Components/units/units.component';
     HomeComponent,
     SalesInvoiceComponent,
     UnitsComponent,
-    ItemComponent
+    ItemComponent,
+    ItemsListComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

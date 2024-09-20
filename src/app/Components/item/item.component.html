@@ -15,6 +15,9 @@
             </select>
           </div>
         </div>
+          <div *ngIf="ItemForm.get('companyId')?.touched && ItemForm.get('companyId')?.invalid">
+      <p class="text-danger" style="margin-left: 300px; ;" *ngIf="ItemForm.get('companyId')?.hasError('required')">Company is required</p>
+    </div>
 
         <!-- Type Name -->
         <div class="form-group row mb-3">
@@ -27,6 +30,10 @@
           </div>
         </div>
 
+        <div *ngIf="ItemForm.get('typeId')?.touched && ItemForm.get('typeId')?.invalid">
+          <p class="text-danger" style="margin-left: 300px; ;" *ngIf="ItemForm.get('typeId')?.hasError('required')">type is required</p>
+        </div>
+
         <!-- Name -->
         <div class="form-group row mb-3">
           <label for="name" class="col-sm-3 col-form-label">Name:</label>
@@ -35,28 +42,50 @@
           </div>
         </div>
 
+        <div *ngIf="ItemForm.get('name')?.touched && ItemForm.get('name')?.invalid">
+          <p class="text-danger" style="margin-left: 300px; ;" *ngIf="ItemForm.get('name')?.hasError('required')">Name is required</p>
+        </div>
+
         <!-- Available Quantity -->
         <div class="form-group row mb-3">
           <label for="availableQuantity" class="col-sm-3 col-form-label">Available Quantity:</label>
           <div class="col-sm-9">
-            <textarea id="availableQuantity" formControlName="availableQuantity" class="form-control" placeholder="Enter available quantity"></textarea>
+            <input type="number" id="availableQuantity" formControlName="availableQuantity" class="form-control" placeholder="Enter available quantity">
           </div>
+        </div>
+
+        <div *ngIf="ItemForm.get('availableQuantity')?.touched && ItemForm.get('availableQuantity')?.invalid">
+          <p class="text-danger" style="margin-left: 300px;" *ngIf="ItemForm.get('availableQuantity')?.hasError('required')">available Quantity is required</p>
+          <p class="text-danger" style="margin-left: 300px;" *ngIf="ItemForm.get('availableQuantity')?.hasError('pattern')">available Quantity must be a valid number</p>
+
         </div>
 
         <!-- Buying Price -->
         <div class="form-group row mb-3">
           <label for="buyingPrice" class="col-sm-3 col-form-label">Buying Price:</label>
           <div class="col-sm-9">
-            <textarea id="buyingPrice" formControlName="buyingPrice" class="form-control" placeholder="Enter buying price"></textarea>
+            <input type="number" id="buyingPrice" formControlName="buyingPrice" class="form-control" placeholder="Enter buying price">
           </div>
+        </div>
+
+
+        <div *ngIf="ItemForm.get('buyingPrice')?.touched && ItemForm.get('buyingPrice')?.invalid ">
+          <p class="text-danger" style="margin-left: 300px;" *ngIf="ItemForm.get('buyingPrice')?.hasError('required')">buying price is required</p>
+          <p class="text-danger" style="margin-left: 300px;" *ngIf="ItemForm.get('buyingPrice')?.hasError('pattern')">buying price must be a valid number</p>
         </div>
 
         <!-- Selling Price -->
         <div class="form-group row mb-3">
           <label for="sellingPrice" class="col-sm-3 col-form-label">Selling Price:</label>
           <div class="col-sm-9">
-            <textarea id="sellingPrice" formControlName="sellingPrice" class="form-control" placeholder="Enter selling price"></textarea>
+            <input type="number" id="sellingPrice" formControlName="sellingPrice" class="form-control" placeholder="Enter selling price">
           </div>
+        </div>
+
+        <div *ngIf="ItemForm.get('sellingPrice')?.touched && ItemForm.get('sellingPrice')?.invalid">
+          <p class="text-danger" style="margin-left: 300px; ;" *ngIf="ItemForm.get('sellingPrice')?.hasError('required')">selling Price is required</p>
+          <p class="text-danger" style="margin-left: 300px;" *ngIf="ItemForm.get('sellingPrice')?.hasError('pattern')">selling price must be a valid number</p>
+
         </div>
 
         <!-- Unit -->
@@ -68,6 +97,10 @@
               <option *ngFor="let unit of units" [value]="unit.id">{{ unit.name }}</option>
             </select>
           </div>
+        </div>
+
+        <div *ngIf="ItemForm.get('unitId')?.touched && ItemForm.get('unitId')?.invalid">
+          <p class="text-danger" style="margin-left: 300px; ;" *ngIf="ItemForm.get('unitId')?.hasError('required')">Unit is required</p>
         </div>
 
         <!-- Notes -->
@@ -82,8 +115,8 @@
         <div class="form-group row">
           <div class="col-sm-9 offset-sm-3">
             <button type="submit" class="btn btn-success me-2" [disabled]="!ItemForm.valid"><i class="fa fa-save"></i> Save</button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
-            <button id="list"  class="btn btn-primary"><a routerLink="" style="color:white;text-decoration: none;">view all Items</a></button>
+            <button type="button" routerLink="/home" (click)="ItemForm.reset()" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
+            <button id="list"  class="btn btn-primary"><a routerLink="/items-list" style="color:white;text-decoration: none;">view all Items</a></button>
           </div>
         </div>
       </form>

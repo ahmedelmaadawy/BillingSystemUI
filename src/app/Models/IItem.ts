@@ -5,9 +5,9 @@ export interface IItem {
   availableQyantity: number,
   buyingPrice: number,
   sellingPrice : number,
-  companyName?: string,
-  typeName? : string,
-  unitName?: string
+  company?: string,
+  type? : string,
+  unit?: string
   companyId : number,
   typeId : number,
   unitId : number

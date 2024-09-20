@@ -18,11 +18,13 @@ import { ClientListComponent } from './Components/client-list/client-list.compon
 
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
+import { ItemsListComponent } from './Components/items-list/items-list.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
   { path: 'company/:id', component: CompanyComponent, title: 'Company' },
+
   {
     path: 'company-list',
     component: CompanylistComponent,
@@ -34,6 +36,7 @@ export const routes: Routes = [
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types/:id', component: TypesComponent, title: 'Types' },
   { path: 'types-list', component: TypesListComponent, title: 'Types' },
+  { path: 'items-list',component:ItemsListComponent,title:'items'},
   { path: 'edit-unit/:id', component: UnitFormComponent, title: 'Unit' },
   { path: 'client-list', component: ClientListComponent, title: 'ClientList' },
   {
