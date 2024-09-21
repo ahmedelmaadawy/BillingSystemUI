@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { LoginService } from '../../Services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ import { LoginService } from '../../Services/login.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private route: Router) {}
   LoginForm: FormGroup = new FormGroup({
     userName: new FormControl('', [
       Validators.required,
@@ -35,14 +36,14 @@ export class LoginComponent {
         next: (response) => {
           console.log(response);
           localStorage.setItem('Token', response.token);
-          
+          this.route.navigateByUrl('/home');
         },
         error: (err) => {
-          console.log(err)
-        }
+          console.log(err);
+        },
       });
     } else {
-      alert("error");
+      alert('error');
     }
   }
 }
