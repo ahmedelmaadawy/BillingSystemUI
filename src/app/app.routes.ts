@@ -16,6 +16,7 @@ import { ItemComponent } from './Components/item/item.component';
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -33,6 +34,7 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
+  { path: 'editItem/:id',component:EditItemComponent,title:'edit Item'},
   { path: 'items', component: ItemComponent, title: 'Items' },
   { path: 'edit-unit/0', component: UnitFormComponent, title: 'UnitForm' }, //************/
   { path: 'edit-unit/:id', component: UnitFormComponent, title: 'UnitForm' }, //*******/

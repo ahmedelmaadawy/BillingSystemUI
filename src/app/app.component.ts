@@ -9,6 +9,7 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
 import { ItemComponent } from './Components/item/item.component';
 import { UnitsComponent } from './Components/units/units.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ import { ItemsListComponent } from './Components/items-list/items-list.component
     SalesInvoiceComponent,
     UnitsComponent,
     ItemComponent,
-    ItemsListComponent
+    ItemsListComponent,
+    EditItemComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

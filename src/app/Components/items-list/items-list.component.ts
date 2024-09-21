@@ -25,6 +25,7 @@ export class ItemsListComponent {
       },
     });
   }
+  
   deleteItem(id: number) {
     this.itemService.deleteItem(id).subscribe({
       next: (response) => {
