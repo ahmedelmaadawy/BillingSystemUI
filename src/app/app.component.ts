@@ -9,6 +9,7 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
 import { ItemComponent } from './Components/item/item.component';
 import { UnitsComponent } from './Components/units/units.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
 import { LoginComponent } from './Components/login/login.component';
 import { CommonModule } from '@angular/common';
 
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
     UnitsComponent,
     ItemComponent,
     ItemsListComponent,
+    EditItemComponent
     LoginComponent,
     CommonModule,
   ],

@@ -19,6 +19,7 @@ import { ClientListComponent } from './Components/client-list/client-list.compon
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
 import { LoginComponent } from './Components/login/login.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -43,6 +44,7 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
+  { path: 'editItem/:id',component:EditItemComponent,title:'edit Item'},
   { path: 'items', component: ItemComponent, title: 'Items' },
   { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
   {
