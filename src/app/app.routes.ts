@@ -7,12 +7,15 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
 import { HomeComponent } from './Components/home/home.component';
 
 import { ClientComponent } from './Components/client/client.component';
+
 import { EmployeeComponent } from './Components/employee/employee.component';
 import { UnitFormComponent } from './Components/unit-form/unit-form.component';
 
 import { TypesComponent } from './Components/types/types.component';
 import { SalesreportComponent } from './Components/salesreport/salesreport.component';
 import { ItemComponent } from './Components/item/item.component';
+import { ClientListComponent } from './Components/client-list/client-list.component';
+
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
@@ -22,13 +25,21 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
   { path: 'company/:id', component: CompanyComponent, title: 'Company' },
-  { path: 'company-list',component: CompanylistComponent,title: 'List of Companies'},
-  { path: 'unit', component: UnitsComponent, title: 'Units' },
+
+  {
+    path: 'company-list',
+    component: CompanylistComponent,
+    title: 'List of Companies',
+  },
+
+  { path: 'unit/:id', component: UnitsComponent, title: 'Units' },
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types/:id', component: TypesComponent, title: 'Types' },
   { path: 'types-list', component: TypesListComponent, title: 'Types' },
   { path: 'items-list',component:ItemsListComponent,title:'items'},
+  { path: 'edit-unit/:id', component: UnitFormComponent, title: 'Unit' },
+  { path: 'client-list', component: ClientListComponent, title: 'ClientList' },
   {
     path: 'salesreport',
     component: SalesreportComponent,
@@ -36,8 +47,7 @@ export const routes: Routes = [
   },
   { path: 'editItem/:id',component:EditItemComponent,title:'edit Item'},
   { path: 'items', component: ItemComponent, title: 'Items' },
-  { path: 'edit-unit/0', component: UnitFormComponent, title: 'UnitForm' }, //************/
-  { path: 'edit-unit/:id', component: UnitFormComponent, title: 'UnitForm' }, //*******/
+  { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
   {
     path: 'storage-report',
     component: StorageReportComponent,
