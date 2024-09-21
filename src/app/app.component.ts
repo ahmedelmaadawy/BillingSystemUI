@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
     UnitsComponent,
     ItemComponent,
     ItemsListComponent,
-    EditItemComponent
+    EditItemComponent,
     LoginComponent,
     CommonModule,
   ],
