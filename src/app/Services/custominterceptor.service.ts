@@ -1,6 +1,8 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, Observable, throwError } from 'rxjs';
 
 export const customInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
@@ -12,6 +14,15 @@ export const customInterceptor: HttpInterceptorFn = (
         headers: req.headers.set('Authorization', `Bearer ${token}`),
       })
     : req;
+  const router = inject(Router);
 
-  return next(clonedRequest);
+  return next(clonedRequest).pipe(
+    catchError((error) => {
+      if (error.status === 401) {
+        // If the response is 401 Unauthorized, navigate to the login page
+        router.navigate(['/login']);
+      }
+      return throwError(() => error);
+    })
+  );
 };
