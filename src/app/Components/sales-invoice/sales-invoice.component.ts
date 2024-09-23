@@ -22,8 +22,6 @@ import { IItem } from '../../Models/IItem';
   templateUrl: './sales-invoice.component.html',
   styleUrls: ['./sales-invoice.component.css'],
 })
-
-
 export class SalesInvoiceComponent implements OnInit {
   salesInvoiceForm: FormGroup;
   itemForm: FormGroup;
@@ -98,6 +96,13 @@ export class SalesInvoiceComponent implements OnInit {
     const sellingPrice = this.itemForm.get('sellingPrice')?.value || 0;
     const total = quantity * sellingPrice;
     this.itemForm.get('total')?.setValue(total);
+  }
+  ngOnInit(): void {
+    this._clientService.GetClients().subscribe({
+      next: (response) => {
+        this.clients = response;
+      }
+    });
   }
 
   addItem() {

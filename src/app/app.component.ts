@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { ClientComponent } from './Components/client/client.component';
 import { EmployeeComponent } from './Components/employee/employee.component';
@@ -9,6 +9,9 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
 import { ItemComponent } from './Components/item/item.component';
 import { UnitsComponent } from './Components/units/units.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
+import { LoginComponent } from './Components/login/login.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -22,11 +25,22 @@ import { ItemsListComponent } from './Components/items-list/items-list.component
     SalesInvoiceComponent,
     UnitsComponent,
     ItemComponent,
-    ItemsListComponent
+    ItemsListComponent,
+    EditItemComponent
+    LoginComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  isLoginPage: boolean = false;
   title = 'task';
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginPage = event.url === '/login';
+      }
+    });
+  }
 }
