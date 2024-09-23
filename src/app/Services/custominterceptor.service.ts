@@ -19,7 +19,6 @@ export const customInterceptor: HttpInterceptorFn = (
   return next(clonedRequest).pipe(
     catchError((error) => {
       if (error.status === 401) {
-        // If the response is 401 Unauthorized, navigate to the login page
         router.navigate(['/login']);
       }
       return throwError(() => error);
