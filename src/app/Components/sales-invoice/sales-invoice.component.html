@@ -8,12 +8,12 @@
       <form [formGroup]="salesInvoiceForm" (ngSubmit)="submitForm()">
         <div class="row">
           <div class="col-md-4 mb-3">
-            <label for="billsDate">Bills Date:</label>
+            <label for="billDate">Bills Date:</label>
             <input
               type="date"
-              id="billsDate"
+              id="billDate"
               class="form-control"
-              formControlName="billsDate"
+              formControlName="billDate"
             />
           </div>
           <div class="col-md-4 mb-3">
@@ -35,7 +35,7 @@
               </option>
             </select>
           </div>
-          <div *ngIf="salesInvoiceForm.get('billsDate')!.invalid && salesInvoiceForm.get('billsDate')!.touched">
+          <div *ngIf="salesInvoiceForm.get('billDate')!.invalid && salesInvoiceForm.get('billDate')!.touched">
             <small class="text-danger">Bill Date is required</small>
           </div>
           <div *ngIf="salesInvoiceForm.get('clientName')!.invalid && salesInvoiceForm.get('clientName')!.touched">
@@ -124,16 +124,20 @@
             <input type="number" id="billsTotal" class="form-control" formControlName="billsTotal" />
           </div>
           <div class="col-md-4 mb-3">
-            <label for="percentageDiscount">Percentage Discount:</label>
-            <input type="number" id="percentageDiscount" class="form-control" formControlName="percentageDiscount" />
+            <label for="discountPercentage">Percentage Discount:</label>
+            <input type="number" id="discountPercentage" class="form-control" formControlName="discountPercentage" />
           </div>
           <div class="col-md-4 mb-3">
-            <label for="valueDiscount">Value Discount:</label>
-            <input type="number" id="valueDiscount" class="form-control" formControlName="valueDiscount" />
+            <label for="discountValue">Value Discount:</label>
+            <input type="number" id="discountValue" class="form-control" formControlName="discountValue" />
           </div>
           <div class="col-md-4 mb-3">
-            <label for="theNet">The Net:</label>
-            <input type="number" id="theNet" class="form-control" formControlName="theNet" />
+            <label for="net
+            ">The net
+              :</label>
+            <input type="number" id="net
+            " class="form-control" formControlName="net
+            " />
           </div>
           <div class="col-md-4 mb-3">
             <label for="paidUp">Paid Up:</label>
@@ -143,10 +147,10 @@
             <label for="theRest">The Rest:</label>
             <input type="number" id="theRest" class="form-control" formControlName="theRest" />
           </div>
-          <div *ngIf="salesInvoiceForm.get('percentageDiscount')?.hasError('min')">
+          <div *ngIf="salesInvoiceForm.get('discountPercentage')?.hasError('min')">
             <small class="text-danger">Percentage discount must be greater than or equal to 0.</small>
           </div>
-          <div *ngIf="salesInvoiceForm.get('valueDiscount')?.hasError('min')">
+          <div *ngIf="salesInvoiceForm.get('discountValue')?.hasError('min')">
             <small class="text-danger">Value discount must be greater than or equal to 0.</small>
           </div>
           <div *ngIf="salesInvoiceForm.get('paidUp')?.hasError('min')">
@@ -160,6 +164,7 @@
     </div>
   </div>
 </div>
+
 
 
     <!-- Request A Form Card -->
