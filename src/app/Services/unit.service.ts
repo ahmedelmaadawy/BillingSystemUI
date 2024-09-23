@@ -10,23 +10,23 @@ export class UnitService {
   constructor(private httpClient: HttpClient) {}
 
   getAllUnits(): Observable<IUnit[]> {
-    return this.httpClient.get<IUnit[]>(`https://localhost:7156/api/Unit`); //*******//
+    return this.httpClient.get<IUnit[]>(`https://localhost:44357/api/Unit`); //*******//
   }
 
   GetUnitById(id: number): Observable<IUnit> {
-    return this.httpClient.get<IUnit>(`https://localhost:7156/api/Unit/${id}`);
+    return this.httpClient.get<IUnit>(`https://localhost:44357/api/Unit/${id}`);
   }
 
   addUnit(unit: IUnit): Observable<IUnit> {
     return this.httpClient.post<IUnit>(
-      `https://localhost:7156/api/Unit`,
+      `https://localhost:44357/api/Unit`,
       unit
     );
   }
 
   deleteUnit(id: number) {
     return this.httpClient.delete<void>(
-      `https://localhost:7156/api/Unit/${id}`
+      `https://localhost:44357/api/Unit/${id}`
     );
   }
 

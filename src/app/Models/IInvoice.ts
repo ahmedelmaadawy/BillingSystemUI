@@ -12,7 +12,7 @@ export interface IItemInvoice {
 export interface IInvoice {
   billsDate: Date;
   billsNumber: number;
-  clientName: string;
+  clientId: string;
   billsTotal: number;
   percentageDiscount?: number;
   valueDiscount?: number;

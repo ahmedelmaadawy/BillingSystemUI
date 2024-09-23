@@ -51,10 +51,9 @@ export class SalesInvoiceComponent implements OnInit {
     this.itemForm = this.fb.group({
       item: [null, Validators.required],
       quantity: ['', [Validators.required, positiveQuantity]],
-      sellingPrice: [{ value: ''}, Validators.required],
+      sellingPrice: [{ value: '' }, Validators.required],
       total: [{ value: '', disabled: true }, Validators.required],
     });
-    
   }
 
   ngOnInit(): void {
@@ -76,13 +75,15 @@ export class SalesInvoiceComponent implements OnInit {
       this.calculateTotal();
     });
     this.salesInvoiceForm.get('paidUp')?.valueChanges.subscribe(() => {
-    this.calculateRest();
+      this.calculateRest();
     });
-    this.salesInvoiceForm.get('percentageDiscount')?.valueChanges.subscribe(() => {
-    this.calculateNet();
-    });
+    this.salesInvoiceForm
+      .get('percentageDiscount')
+      ?.valueChanges.subscribe(() => {
+        this.calculateNet();
+      });
     this.salesInvoiceForm.get('valueDiscount')?.valueChanges.subscribe(() => {
-    this.calculateNet();
+      this.calculateNet();
     });
   }
 
@@ -97,19 +98,11 @@ export class SalesInvoiceComponent implements OnInit {
     const total = quantity * sellingPrice;
     this.itemForm.get('total')?.setValue(total);
   }
-  ngOnInit(): void {
-    this._clientService.GetClients().subscribe({
-      next: (response) => {
-        this.clients = response;
-      }
-    });
-  }
-
   addItem() {
     const item = this.itemForm.getRawValue() as IItemInvoice;
     this.addedItems.push(item);
     this.itemForm.reset();
-    this.calculateBillsTotal(); 
+    this.calculateBillsTotal();
   }
 
   onItemSelected() {
@@ -125,6 +118,7 @@ export class SalesInvoiceComponent implements OnInit {
         ...this.salesInvoiceForm.value,
         items: this.addedItems,
       };
+      console.log(invoice);
       this.invoiceService.postInvoice(invoice).subscribe(
         (response) => {
           console.log('Invoice submitted successfully:', response);
@@ -136,6 +130,7 @@ export class SalesInvoiceComponent implements OnInit {
         }
       );
     } else {
+      console.log(this.salesInvoiceForm.errors);
       alert('Form is invalid');
     }
   }
@@ -145,22 +140,22 @@ export class SalesInvoiceComponent implements OnInit {
   }
   calculateNet() {
     const billsTotal = this.salesInvoiceForm.get('billsTotal')?.value;
-    const percentageDiscount = this.salesInvoiceForm.get('percentageDiscount')?.value || 0;
-    const valueDiscount = this.salesInvoiceForm.get('valueDiscount')?.value || 0;
-  
+    const percentageDiscount =
+      this.salesInvoiceForm.get('percentageDiscount')?.value || 0;
+    const valueDiscount =
+      this.salesInvoiceForm.get('valueDiscount')?.value || 0;
+
     const discountAmount = (percentageDiscount / 100) * billsTotal;
     const net = billsTotal - discountAmount - valueDiscount;
     this.salesInvoiceForm.get('theNet')?.setValue(net);
   }
-  
-  
+
   calculateRest() {
     const theNet = this.salesInvoiceForm.get('theNet')?.value;
     const paidUp = this.salesInvoiceForm.get('paidUp')?.value || 0;
     const theRest = theNet - paidUp;
     this.salesInvoiceForm.get('theRest')?.setValue(theRest);
   }
-  
 }
 
 export function positiveQuantity(control: AbstractControl) {
