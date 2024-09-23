@@ -1,5 +1,5 @@
 export interface IItemInvoice {
-  code: string;
+  code: number;
   name: string;
   unit: string;
   quantity: number;
@@ -11,13 +11,14 @@ export interface IItemInvoice {
 
 export interface IInvoice {
   billsDate: Date;
-  billsNumber: string;
+  billsNumber: number;
   clientName: string;
   billsTotal: number;
   percentageDiscount?: number;
   valueDiscount?: number;
   theNet: number;
   paidUp: number;
+  employeeId: number;
   theRest: number;
   items: IItemInvoice[];
 }
