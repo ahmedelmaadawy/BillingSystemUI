@@ -37,13 +37,12 @@ export class SalesInvoiceComponent implements OnInit {
     private _itemService: ItemService
   ) {
     this.salesInvoiceForm = this.fb.group({
-      billsDate: ['', Validators.required],
       billsNumber: [{ value: '', disabled: true }, Validators.required],
       clientName: ['', Validators.required],
       billsTotal: [{ value: '', disabled: true }, Validators.required],
-      percentageDiscount: ['', [Validators.min(0)]],
-      valueDiscount: ['', [Validators.min(0)]],
-      theNet: [{ value: '', disabled: true }, Validators.required],
+      discountPercentage: ['', [Validators.min(0)]],
+      discountValue: ['', [Validators.min(0)]],
+      net: [{ value: '', disabled: true }, Validators.required],
       paidUp: ['', [Validators.required, Validators.min(0)]],
       theRest: [{ value: '', disabled: true }, Validators.required],
     });
@@ -78,11 +77,11 @@ export class SalesInvoiceComponent implements OnInit {
       this.calculateRest();
     });
     this.salesInvoiceForm
-      .get('percentageDiscount')
+      .get('discountPercentage')
       ?.valueChanges.subscribe(() => {
         this.calculateNet();
       });
-    this.salesInvoiceForm.get('valueDiscount')?.valueChanges.subscribe(() => {
+    this.salesInvoiceForm.get('discountValue')?.valueChanges.subscribe(() => {
       this.calculateNet();
     });
   }
@@ -140,20 +139,20 @@ export class SalesInvoiceComponent implements OnInit {
   }
   calculateNet() {
     const billsTotal = this.salesInvoiceForm.get('billsTotal')?.value;
-    const percentageDiscount =
-      this.salesInvoiceForm.get('percentageDiscount')?.value || 0;
-    const valueDiscount =
-      this.salesInvoiceForm.get('valueDiscount')?.value || 0;
+    const discountPercentage =
+      this.salesInvoiceForm.get('discountPercentage')?.value || 0;
+    const discountValue =
+      this.salesInvoiceForm.get('discountValue')?.value || 0;
 
-    const discountAmount = (percentageDiscount / 100) * billsTotal;
-    const net = billsTotal - discountAmount - valueDiscount;
-    this.salesInvoiceForm.get('theNet')?.setValue(net);
+    const discountAmount = (discountPercentage / 100) * billsTotal;
+    const net = billsTotal - discountAmount - discountValue;
+    this.salesInvoiceForm.get('net')?.setValue(net);
   }
 
   calculateRest() {
-    const theNet = this.salesInvoiceForm.get('theNet')?.value;
+    const net = this.salesInvoiceForm.get('net')?.value;
     const paidUp = this.salesInvoiceForm.get('paidUp')?.value || 0;
-    const theRest = theNet - paidUp;
+    const theRest = net - paidUp;
     this.salesInvoiceForm.get('theRest')?.setValue(theRest);
   }
 }
