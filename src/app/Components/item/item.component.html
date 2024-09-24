@@ -1,7 +1,7 @@
-<div class="container mt-5">
+<div class="container">
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Items Form</h3>
+    <div class="card-header header">
+      <h3 class="card-title " style="color: white;">Items Form</h3>
     </div>
     <div class="card-body">
       <form [formGroup]="ItemForm" (ngSubmit)="onSubmit()">
@@ -116,10 +116,11 @@
           <div class="col-sm-9 offset-sm-3">
             <button type="submit" class="btn btn-success me-2" [disabled]="!ItemForm.valid"><i class="fa fa-save"></i> Save</button>
             <button type="button" routerLink="/home" (click)="ItemForm.reset()" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
-            <button id="list"  class="btn btn-primary"><a routerLink="/items-list" style="color:white;text-decoration: none;">view all Items</a></button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+<button id="list"  class="btn btn-primary"><a routerLink="/items-list" style="color:white;text-decoration: none;">view all Items <b>></b> </a></button>
+

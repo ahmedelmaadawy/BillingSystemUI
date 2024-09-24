@@ -1,5 +1,5 @@
 <div>
-  <a routerLink="/company-list" class="btn btn-primary mb-3">Company List</a>
+  <a routerLink="/company-list" class="btn btn-primary mb-3">Company List<b> > </b> </a>
 </div>
 
 <div class="company">
@@ -8,6 +8,8 @@
   <ng-template #addMode>
     <h3>Add New Company</h3>
   </ng-template>
+  <div class="underline"></div>
+
 
   <form
     [formGroup]="CompanyForm"

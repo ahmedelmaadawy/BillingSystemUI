@@ -1,4 +1,17 @@
 #list{
-  margin-left: 500px;
+position: absolute;
+top: 50%;
+right: 20px;
+background-color: #2babbf;
 
+}
+
+.header{
+  background-color: #2babbf;
+
+}
+
+.container{
+  width: 75%;
+  margin-top: -30px;
 }
