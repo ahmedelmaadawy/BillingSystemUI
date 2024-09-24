@@ -23,8 +23,7 @@ export class ItemComponent implements OnInit {
   companies: ICompany[] = [];
   types: IType[] = [];
   units :IUnit[] = [];
-  id: number = 0;
-  isUpdate: boolean = false;
+  
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -49,7 +48,7 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.loadCompanies();
     this.loadTypes();
     this.loadUnits();

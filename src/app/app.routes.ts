@@ -19,24 +19,24 @@ import { ClientListComponent } from './Components/client-list/client-list.compon
 import { CompanylistComponent } from './Components/companylist/companylist.component';
 import { TypesListComponent } from './Components/types-list/types-list.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
+import { LoginComponent } from './Components/login/login.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'sales-invoice', component: SalesInvoiceComponent },
   { path: 'company/:id', component: CompanyComponent, title: 'Company' },
-
   {
     path: 'company-list',
     component: CompanylistComponent,
     title: 'List of Companies',
   },
-
   { path: 'unit/:id', component: UnitsComponent, title: 'Units' },
   { path: 'client', component: ClientComponent, title: 'Clients' },
   { path: 'employee', component: EmployeeComponent, title: 'Employees' },
   { path: 'types/:id', component: TypesComponent, title: 'Types' },
   { path: 'types-list', component: TypesListComponent, title: 'Types' },
-  { path: 'items-list',component:ItemsListComponent,title:'items'},
+  { path: 'items-list', component: ItemsListComponent, title: 'items' },
   { path: 'edit-unit/:id', component: UnitFormComponent, title: 'Unit' },
   { path: 'client-list', component: ClientListComponent, title: 'ClientList' },
   {
@@ -44,6 +44,7 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
+  { path: 'editItem/:id',component:EditItemComponent,title:'edit Item'},
   { path: 'items', component: ItemComponent, title: 'Items' },
   { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
   {
@@ -51,4 +52,5 @@ export const routes: Routes = [
     component: StorageReportComponent,
     title: 'StorageReport',
   },
+  { path: 'login', component: LoginComponent, title: 'Login' },
 ];

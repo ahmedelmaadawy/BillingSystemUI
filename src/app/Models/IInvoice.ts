@@ -1,23 +1,21 @@
 export interface IItemInvoice {
-  code: string;
+  itemId: number;
+  InvoiceId: number;
   name: string;
-  unit: string;
-  quantity: number;
   sellingPrice: number;
-  discount: number;
+  quantity: number;
   total: number;
-  balance: number;
 }
 
 export interface IInvoice {
-  billsDate: Date;
-  billsNumber: string;
-  clientName: string;
-  billsTotal: number;
-  percentageDiscount?: number;
-  valueDiscount?: number;
-  theNet: number;
+  billDate: Date;
   paidUp: number;
+  net: number;
+  discountValue?: number;
+  discountPercentage?: number;
+  clientId: string;
+  billsTotal: number;
+  employeeId: number;
   theRest: number;
   items: IItemInvoice[];
 }
