@@ -5,7 +5,7 @@
         <h3 class="company-heading text-center">Companies</h3>
       </div>
       <div class="col-md-6 text-end">
-        <a class="custom-button" routerLink="/company"> Add New Company </a>
+        <a class="custom-button" routerLink="/company/0"> Add New Company </a>
       </div>
     </div>
     <div class="company-table-container">
@@ -23,11 +23,13 @@
             <td>{{ item.name }}</td>
             <td>{{ item.note }}</td>
             <td class="action-icons">
-              <i class="fa-solid fa-edit text-warning"
+              <i class="fa-solid fa-edit "
+              style="  color: rgb(41, 55, 205);"
                 [routerLink]="['/company/', item.id ]"
               ></i>
               <i
-                class="fa-solid fa-delete-left text-danger"
+                class="fa-solid fa-delete-left"
+                style="color: rgb(230, 0, 0);"
                 (click)="deleteCompany(item.id)"
               ></i>
             </td>

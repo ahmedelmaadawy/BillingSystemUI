@@ -47,13 +47,13 @@
         }}
     </div>
     @if (isupdate) {
-      <button class="btn btn-info" (click)="Update()">Update</button>
+      <button class="btn btn-info submit" (click)="Update()">Update</button>
   }@else {
-    <button type="submit" class="btn btn-primary" (click)="AddClient()">Add Client</button>
+    <button type="submit" class="btn btn-primary submit" (click)="AddClient()">Add Client</button>
 
   }
-    
+
   </form>
-<button class="btn btn-primary my-2"(click)="ShowList()">Show List</button>
 
 </div>
+<button class="btn btn-primary router"(click)="ShowList()">Show List <b>></b></button>

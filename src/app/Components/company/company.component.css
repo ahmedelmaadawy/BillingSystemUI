@@ -1,9 +1,27 @@
+body{
+  position: relative;
+}
+
 .company{
-    width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-25%,-50%);
+    width: 400px;
     background-color: white;
     padding: 40px 20px;
-    height: fit-content;
+    /* height: fit-content; */
+    height: 470px ;
     border-radius: 8px;
+}
+.company h3{
+  text-align: center;
+}
+.underline{
+  background-color: black;
+  width: 55%;
+  height: 3px;
+  margin: 0 auto 60px auto;
 }
 p{
     margin: 10px 0 0 5px;
@@ -28,11 +46,24 @@ input:focus{
 button ,a{
     outline: none;
     border: none;
-    background-color: #59B4C3;
+    background-color: #2babbf;
     color: white;
     padding: 5px 15px;
     border-radius: 8px;
 }
+button{
+  display: block;
+  margin: 0 auto;
+  background-color: #2babbf;
+width: 30%;
+font-size: 20px;
+margin-top: 75px;
+}
 a{
   text-decoration: none;
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  /* width: 150px; */
+  font-size: 18px;
 }
