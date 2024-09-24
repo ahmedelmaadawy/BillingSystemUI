@@ -26,8 +26,8 @@ export class SalesInvoiceComponent implements OnInit {
   salesInvoiceForm: FormGroup;
   itemForm: FormGroup;
   addedItems: Array<IItemInvoice> = [];
-  clients?: IClient[];
-  items?: IItem[];
+  clients: IClient[]=[];
+  items: IItem[]=[];
   // item?: IItemInvoice[];
 
   constructor(
@@ -37,6 +37,7 @@ export class SalesInvoiceComponent implements OnInit {
     private _itemService: ItemService
   ) {
     this.salesInvoiceForm = this.fb.group({
+      billDate: [{value:''},Validators.required ],
       billsNumber: [{ value: '', disabled: true }, Validators.required],
       clientName: ['', Validators.required],
       billsTotal: [{ value: '', disabled: true }, Validators.required],
@@ -59,7 +60,10 @@ export class SalesInvoiceComponent implements OnInit {
     this.generateBillNumber();
 
     this._clientService.GetClients().subscribe({
-      next: (response) => (this.clients = response),
+      next: (response) => {
+        this.clients = response;
+        console.log(this.clients);
+      },
     });
 
     this._itemService.getAllItems().subscribe({
@@ -100,6 +104,7 @@ export class SalesInvoiceComponent implements OnInit {
   addItem() {
     const item = this.itemForm.getRawValue() as IItemInvoice;
     this.addedItems.push(item);
+    console.log(this.addedItems);
     this.itemForm.reset();
     this.calculateBillsTotal();
   }
