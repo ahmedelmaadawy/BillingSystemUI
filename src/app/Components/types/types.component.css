@@ -1,7 +1,22 @@
 /* Container styling */
+body{
+  position: relative;
+}
 .container {
   max-width: 800px;
-  margin: 40px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%,-70%);
+}
+
+.router button{
+  position: absolute;
+  top: 48%;
+  right: 50px;
+  background-color: #2babbf;
+  border-radius: 5px;
+  color: white;
 }
 
 /* Card styling */

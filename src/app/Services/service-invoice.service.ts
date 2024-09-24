@@ -7,7 +7,7 @@ import { IInvoice, IItemInvoice } from '../Models/IInvoice';
   providedIn: 'root',
 })
 export class InvoiceServiceService {
-  private apiUrl = 'https://localhost:44357/api/invoices';
+  private apiUrl = 'https://localhost:7156/api/invoices';
 
   constructor(private http: HttpClient) {}
 

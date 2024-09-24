@@ -16,6 +16,8 @@ button {
   display: block;
   width: 100px;
   float: left;
+  background-color: #2babbf;
+
 }
 th{
   background-color: #2babbf;
@@ -26,4 +28,8 @@ th{
 
 td{
   text-align: center;
+}
+
+button:hover{
+  background-color: #228190;
 }

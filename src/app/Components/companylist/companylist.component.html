@@ -23,11 +23,13 @@
             <td>{{ item.name }}</td>
             <td>{{ item.note }}</td>
             <td class="action-icons">
-              <i class="fa-solid fa-edit text-warning"
+              <i class="fa-solid fa-edit "
+              style="  color: rgb(41, 55, 205);"
                 [routerLink]="['/company/', item.id ]"
               ></i>
               <i
-                class="fa-solid fa-delete-left text-danger"
+                class="fa-solid fa-delete-left"
+                style="color: rgb(230, 0, 0);"
                 (click)="deleteCompany(item.id)"
               ></i>
             </td>
