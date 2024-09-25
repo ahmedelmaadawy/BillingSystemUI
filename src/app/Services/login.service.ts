@@ -9,6 +9,6 @@ export class LoginService {
 
   constructor(private http:HttpClient) { }
   onLogin(obj: any): Observable<any>{
-    return this.http.post(`https://localhost:44357/api/Authenation/login`,obj);
+    return this.http.post(`https://localhost:7156/api/Authenation/login`,obj);
   }
 }
