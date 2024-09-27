@@ -25,6 +25,10 @@ import { IItem } from '../../Models/IItem';
 export class SalesInvoiceComponent implements OnInit {
   salesInvoiceForm: FormGroup;
   itemForm: FormGroup;
+  net: number = 0;
+  billsNumber: number = 0;
+  total: number = 0;
+
   addedItems: Array<{
     itemId: number;
     invoiceId: number;
@@ -43,7 +47,7 @@ export class SalesInvoiceComponent implements OnInit {
   ) {
     this.salesInvoiceForm = this.fb.group({
       billDate: [{ value: '', disabled: false }, Validators.required],
-      billsNumber: [{ value: '', disabled: true }, Validators.required],
+      billNumber: [{ value: '', disabled: true }, Validators.required],
       clientId: ['', Validators.required],
       billsTotal: [{ value: '', disabled: true }, Validators.required],
       discountPercentage: ['', [Validators.min(0)]],
@@ -100,8 +104,8 @@ export class SalesInvoiceComponent implements OnInit {
     this.invoiceService.getAllInvoices().subscribe({
       next: (response) => {
         randomBillNumber = response.length;
-    this.salesInvoiceForm.get('billsNumber')?.setValue(randomBillNumber+1);
-
+        this.billsNumber = response.length;
+        this.salesInvoiceForm.get('billNumber')?.setValue(randomBillNumber + 1);
       },
     });
   }
@@ -141,7 +145,11 @@ export class SalesInvoiceComponent implements OnInit {
   submitForm() {
     if (this.salesInvoiceForm.valid) {
       const invoice: IInvoice = {
+        net: this.net,
+        billNumber: this.billsNumber,
+        billsTotal: this.total,
         ...this.salesInvoiceForm.value,
+
         employeeId: 1,
         itemInvoices: this.addedItems.map((item) => ({
           itemId: item.itemId,
@@ -151,7 +159,8 @@ export class SalesInvoiceComponent implements OnInit {
           sellingPrice: item.sellingPrice,
         })),
       };
-
+      console.log(this.salesInvoiceForm.value);
+      console.log(invoice);
       this.invoiceService.postInvoice(invoice).subscribe(
         (response) => {
           console.log('Invoice submitted successfully:', response);
@@ -171,6 +180,7 @@ export class SalesInvoiceComponent implements OnInit {
 
   calculateBillsTotal() {
     const total = this.addedItems.reduce((acc, item) => acc + item.total, 0);
+    this.total = total;
     this.salesInvoiceForm.get('billsTotal')?.setValue(total);
   }
 
@@ -183,6 +193,7 @@ export class SalesInvoiceComponent implements OnInit {
 
     const discountAmount = (discountPercentage / 100) * billsTotal;
     const net = billsTotal - discountAmount - discountValue;
+    this.net = net;
     this.salesInvoiceForm.get('net')?.setValue(net);
   }
 
