@@ -39,24 +39,24 @@ export class TypesComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = Number(params['id']);
-      console.log(this.id);
     });
     this.isUpdate = this.id != 0;
 
     this._companyService.getAllCompanies().subscribe({
       next: (response) => {
         this.companies = response;
-        console.log(this.companies);
       },
-      error: (err) => {
-        console.log(err);
-      },
+      error: (err) => {},
     });
     if (this.isUpdate) {
       this._typeService.GetTypeById(this.id).subscribe({
         next: (response) => {
+          console.log(response);
+          let companyId = this.companies?.filter(
+            (c) => c.name == response.companyName
+          )[0].id;
           this.typeForm.patchValue({
-            companyId: Number(response.companyId),
+            companyId: companyId,
             name: response.name,
             note: response.note,
           });
@@ -67,7 +67,6 @@ export class TypesComponent implements OnInit {
       });
     }
   }
-
   onSubmit(): void {
     if (this.typeForm.valid) {
       console.log('Form Submitted:', this.typeForm.value);
@@ -100,26 +99,26 @@ export class TypesComponent implements OnInit {
   }
   editType(): void {
     // if (this.typeForm.valid) {
-    console.log(this.typeForm.value)
-      this._typeService.editType(this.id, this.typeForm.value).subscribe({
-        next: () => {
-          Swal.fire({
-            title: 'Saved Successfully',
-            text: 'Do you want to continue',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error In Database',
-            text: `Something went wrong! name must be unique`,
-            confirmButtonText: 'OK',
-          });
-          console.log(err);
-        },
-      });
+    console.log(this.typeForm.value);
+    this._typeService.editType(this.id, this.typeForm.value).subscribe({
+      next: () => {
+        Swal.fire({
+          title: 'Saved Successfully',
+          text: 'Do you want to continue',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error In Database',
+          text: `Something went wrong! name must be unique`,
+          confirmButtonText: 'OK',
+        });
+        console.log(err);
+      },
+    });
     // } else {
     //   Swal.fire({
     //     icon: 'error',
