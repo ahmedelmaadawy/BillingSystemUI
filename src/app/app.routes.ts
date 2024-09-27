@@ -21,6 +21,7 @@ import { TypesListComponent } from './Components/types-list/types-list.component
 import { ItemsListComponent } from './Components/items-list/items-list.component';
 import { EditItemComponent } from './Components/edit-item/edit-item.component';
 import { LoginComponent } from './Components/login/login.component';
+import { InvoiceDetailsComponent } from './Components/invoice-details/invoice-details.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -30,6 +31,11 @@ export const routes: Routes = [
     path: 'company-list',
     component: CompanylistComponent,
     title: 'List of Companies',
+  },
+  {
+    path: 'invoice-details/:id',
+    component: InvoiceDetailsComponent,
+    title: 'InvoiceDetails',
   },
   { path: 'unit/:id', component: UnitsComponent, title: 'Units' },
   { path: 'client', component: ClientComponent, title: 'Clients' },
@@ -44,7 +50,7 @@ export const routes: Routes = [
     component: SalesreportComponent,
     title: 'Salesreport',
   },
-  { path: 'editItem/:id',component:EditItemComponent,title:'edit Item'},
+  { path: 'editItem/:id', component: EditItemComponent, title: 'edit Item' },
   { path: 'items', component: ItemComponent, title: 'Items' },
   { path: 'add-unit', component: UnitFormComponent, title: 'UnitForm' },
   {

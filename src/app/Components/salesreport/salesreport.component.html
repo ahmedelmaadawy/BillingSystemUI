@@ -41,6 +41,7 @@
             <th>Bills Date</th>
             <th>Bill Total</th>
             <th>Net Value</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +52,13 @@
             <td>{{ item.billDate }}</td>
             <td>{{ item.billsTotal }}</td>
             <td>{{ item.net }}</td>
+            <td>
+              <a
+                class="btn btn-success"
+                [routerLink]="['/invoice-details', item.id ]"
+                >Details</a
+              >
+            </td>
           </tr>
           }
         </tbody>

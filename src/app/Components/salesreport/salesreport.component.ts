@@ -10,11 +10,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './salesreport.component.html',
   styleUrls: ['./salesreport.component.css'],
 })
