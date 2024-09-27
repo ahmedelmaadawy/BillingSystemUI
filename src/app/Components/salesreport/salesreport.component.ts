@@ -19,7 +19,7 @@ import {
   styleUrls: ['./salesreport.component.css'],
 })
 export class SalesreportComponent {
-  report?: IInvoiceReport[];
+  report: IInvoiceReport[] = [];
   reportForm: FormGroup;
   constructor(
     private _reportService: InvoiceServiceService,
@@ -36,7 +36,9 @@ export class SalesreportComponent {
         .getReport(this.reportForm.value.from, this.reportForm.value.to)
         .subscribe({
           next: (response) => {
+            this.report = response;
             console.log(response);
+            console.log(this.report);
           },
         });
     }

@@ -1,3 +1,4 @@
+import { response } from 'express';
 import { ItemService } from './../../Services/item.service';
 import { InvoiceServiceService } from './../../Services/service-invoice.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,6 @@ import { IInvoice } from '../../Models/IInvoice';
 import { IClient } from '../../Models/IClient';
 import { ClientService } from '../../Services/client.service';
 import { IItem } from '../../Models/IItem';
-
 
 @Component({
   selector: 'app-sales-invoice',
@@ -96,8 +96,14 @@ export class SalesInvoiceComponent implements OnInit {
   }
 
   generateBillNumber() {
-    const randomBillNumber = Math.floor(Math.random() * 1000000);
-    this.salesInvoiceForm.get('billsNumber')?.setValue(randomBillNumber);
+    let randomBillNumber = 1;
+    this.invoiceService.getAllInvoices().subscribe({
+      next: (response) => {
+        randomBillNumber = response.length;
+    this.salesInvoiceForm.get('billsNumber')?.setValue(randomBillNumber+1);
+
+      },
+    });
   }
 
   calculateTotal() {
@@ -123,7 +129,9 @@ export class SalesInvoiceComponent implements OnInit {
   onItemSelected() {
     const selectedItemId = this.itemForm.get('item')?.value;
     if (selectedItemId) {
-      const selectedItem = this.items.find((item) => item.id === +selectedItemId);
+      const selectedItem = this.items.find(
+        (item) => item.id === +selectedItemId
+      );
       if (selectedItem) {
         this.itemForm.get('sellingPrice')?.setValue(selectedItem.sellingPrice);
       }
@@ -135,7 +143,7 @@ export class SalesInvoiceComponent implements OnInit {
       const invoice: IInvoice = {
         ...this.salesInvoiceForm.value,
         employeeId: 1,
-        itemInvoices: this.addedItems.map(item => ({
+        itemInvoices: this.addedItems.map((item) => ({
           itemId: item.itemId,
           invoiceId: 0,
           quantity: item.quantity,
@@ -160,7 +168,6 @@ export class SalesInvoiceComponent implements OnInit {
       alert('Form is invalid');
     }
   }
-
 
   calculateBillsTotal() {
     const total = this.addedItems.reduce((acc, item) => acc + item.total, 0);
