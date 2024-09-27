@@ -1,58 +1,52 @@
 <div class="container mt-5">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Sales Report</h3>
-      </div>
-      <div class="card-body">
-        <form style="margin:5px; "  >
-        <label style="margin-right: 10%;margin-bottom: 3%;">Choose a period</label>
-        <input style="width: 40%; margin-right: 30%;"  type="date">
-        <label style="margin-right: 10%;margin-bottom: 3%;" >Choose a period</label>
-        <input style="width: 40%; margin-right: 30%;" type="date">
-        <button style="display:block;margin-left: 80%;  background-color: #2babbf; width: 150px;" class="btn btn-success" >Enter</button>
-        </form>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Bills Date</th>
-              <th>Bills Number</th>
-              <th>Client Name</th>
-              <th>Item Name</th>
-              <th>Selling Price</th>
-              <th>Quantity</th>
-              <th>Client Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>September, 2024</td>
-              <td>12354878688</td>
-              <td>Islam</td>
-              <td>Cola</td>
-              <td>$2.50</td>
-              <td>20.00</td>
-              <td>Islam</td>
-            </tr>
-            <tr>
-              <td>September, 2024</td>
-              <td>12354878688</td>
-              <td>Islam</td>
-              <td>Cola</td>
-              <td>$2.50</td>
-              <td>20.00</td>
-              <td>Islam</td>
-            </tr>
-            <tr>
-              <td>September, 2024</td>
-              <td>12354878688</td>
-              <td>Islam</td>
-              <td>Cola</td>
-              <td>$2.50</td>
-              <td>20.00</td>
-              <td>Islam</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Sales Report</h3>
+    </div>
+    <div class="card-body">
+      <form
+        style="margin: 5px"
+        [formGroup]="reportForm"
+        (ngSubmit)="getReport()"
+      >
+        <label style="margin-right: 10%; margin-bottom: 3%">From Date</label>
+        <input
+          style="width: 40%; margin-right: 30%"
+          type="date"
+          formControlName="from"
+        />
+        <label style="margin-right: 10%; margin-bottom: 3%">To Date </label>
+        <input
+          style="width: 40%; margin-left: 20px; margin-right: 30%"
+          type="date"
+          formControlName="to"
+        />
+        <button
+          style="
+            display: block;
+            margin-left: 80%;
+            background-color: #2babbf;
+            width: 150px;
+          "
+          class="btn btn-success"
+        >
+          Enter
+        </button>
+      </form>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Bills Date</th>
+            <th>Bills Number</th>
+            <th>Client Name</th>
+            <th>Item Name</th>
+            <th>Selling Price</th>
+            <th>Quantity</th>
+            <th>Client Name</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </div>
+</div>

@@ -134,22 +134,22 @@ export class SalesInvoiceComponent implements OnInit {
     if (this.salesInvoiceForm.valid) {
       const invoice: IInvoice = {
         ...this.salesInvoiceForm.value,
-        employeeId: 1, 
+        employeeId: 1,
         itemInvoices: this.addedItems.map(item => ({
           itemId: item.itemId,
-          invoiceId: 0, 
+          invoiceId: 0,
           quantity: item.quantity,
           total: item.total,
           sellingPrice: item.sellingPrice,
         })),
       };
-  
+
       this.invoiceService.postInvoice(invoice).subscribe(
         (response) => {
           console.log('Invoice submitted successfully:', response);
           this.salesInvoiceForm.reset();
           this.addedItems = [];
-          this.generateBillNumber(); 
+          this.generateBillNumber();
         },
         (error) => {
           console.error('Error submitting invoice:', error);
@@ -160,7 +160,7 @@ export class SalesInvoiceComponent implements OnInit {
       alert('Form is invalid');
     }
   }
-  
+
 
   calculateBillsTotal() {
     const total = this.addedItems.reduce((acc, item) => acc + item.total, 0);

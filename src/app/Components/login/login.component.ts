@@ -34,16 +34,13 @@ export class LoginComponent {
     if (this.LoginForm.valid) {
       this.loginService.onLogin(this.LoginForm.value).subscribe({
         next: (response) => {
-          console.log(response);
           localStorage.setItem('Token', response.token);
           this.route.navigateByUrl('/home');
         },
         error: (err) => {
-          console.log(err);
         },
       });
     } else {
-      alert('error');
     }
   }
 }

@@ -7,6 +7,7 @@ import { IClient } from '../Models/IClient';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientComponent } from '../Components/client/client.component';
+import { environment } from '../../environments/environment.development';
 
 @NgModule({
   imports: [CommonModule],
@@ -17,7 +18,7 @@ export class ClientModule {}
   providedIn: 'root',
 })
 export class ClientService {
-  private apiUrl = 'https://localhost:44357/api/Client';
+  private apiUrl = `${environment.baseUrl}/api/Client`;
 
   constructor(private http: HttpClient) {}
 

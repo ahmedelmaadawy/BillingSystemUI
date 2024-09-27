@@ -24,7 +24,7 @@ export class StorageReportComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getAllItems().subscribe({
       next: (response) => {
-        this.storageReport = response;
+        this.storageReport = response.filter((r)=>r.availableQyantity >0);
         console.log(this.storageReport);
       },
       error: (err) => {

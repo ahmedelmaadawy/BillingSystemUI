@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IInvoice } from '../Models/IInvoice';
+import { IInvoiceReport } from '../Models/IInvoiceReport';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceServiceService {
-  private apiUrl = 'https://localhost:7156/api/invoice';
+  private apiUrl = 'https://localhost:44357/api/invoice';
 
   constructor(private http: HttpClient) {}
 
@@ -34,5 +35,11 @@ export class InvoiceServiceService {
   // Delete an invoice by ID
   deleteInvoice(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  //get report
+  getReport(from: string, to: string): Observable<IInvoiceReport[]> {
+    return this.http.get<IInvoiceReport[]>(
+      `${this.apiUrl}/report?From=${from}&To=${to}`
+    );
   }
 }
