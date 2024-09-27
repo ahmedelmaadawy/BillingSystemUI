@@ -1,0 +1,52 @@
+<div class="bg-info">
+    <h3 class="bg-info p-2 text-white" >Invoice Details</h3>
+    <div class="container p-2">
+        <div class="row">
+            <div class="col-md-6">
+                <p  class="bg-white p-2">billDate : <span>{{invoice?.billDate}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">paidUp : <span>{{invoice?.paidUp}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">net : <span>{{invoice?.net}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">discountValue : <span>{{invoice?.discountValue}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">discountPercentage : <span>{{invoice?.discountPercentage}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">billsTotal : <span>{{invoice?.billsTotal}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">clientName : <span>{{invoice?.clientName}}</span></p>
+            </div>
+            <div class="col-md-6">
+                <p class="bg-white p-2">employeeName : <span>{{invoice?.employeeName}}</span></p>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th>itemName</th>
+                        <th>quantity</th>
+                        <th>total</th>
+                      </tr>  
+                      
+                    </thead>
+                    <tbody>
+                        @for (item of invoice?.items; track $index) {
+                            <tr>
+                                <td>{{item.itemName}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.total}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

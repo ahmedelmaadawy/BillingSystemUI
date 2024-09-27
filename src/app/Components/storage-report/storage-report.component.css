@@ -3,31 +3,33 @@
     padding: 20px;
     border-radius: 10px;
   }
-  
+
   h2 {
-    color: #343a40;
+    color: #27374e;
+    margin-bottom: 30px;
   }
-  
+
   .table {
     width: 100%;
     border-collapse: collapse;
+
   }
-  
+
   th, td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
   }
-  
+
   th {
-    background-color: #343a40;
+    background-color: #2babbf !important;
     color: white;
+
   }
-  
+
   td {
     background-color: #ffffff;
   }
-  
+
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: #f2f2f2;
   }
-  

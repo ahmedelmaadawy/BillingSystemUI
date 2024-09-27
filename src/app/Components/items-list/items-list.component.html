@@ -1,0 +1,57 @@
+<div class="item-section">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h3 class="item-heading text-center">Items</h3>
+      </div>
+
+    </div>
+    <div class="item-table-container">
+      <table class="table table-hover item-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>item Details</th>
+            <th>buying Price</th>
+            <th>selling Price</th>
+            <th>availableQyantity</th>
+            <th>unit</th>
+            <th>type</th>
+            <th>company</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of items; track item.id) {
+          <tr>
+            <td>{{ item.name }}</td>
+            <td> {{ item.note}}</td>
+            <td>{{ item.buyingPrice }}</td>
+            <td>{{ item.sellingPrice }}</td>
+            <td>{{ item.availableQyantity }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.type}}</td>
+            <td>{{ item.company }}</td>
+            <td class="action-icons">
+              <i class="fa-solid fa-edit text-warning"
+                [routerLink]="['/editItem/', item.id ]"
+              ></i>
+              <i
+                class="fa-solid fa-delete-left text-danger"
+                (click)="deleteItem(item.id)"
+              ></i>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+  <div class="col-md-10 mt-5 text-end">
+    <a class="custom-button" routerLink="/items"> Add New item </a>
+  </div>
+</div>
+
+

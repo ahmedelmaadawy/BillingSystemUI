@@ -1,184 +1,242 @@
 <div class="container mt-4">
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5><i class="fas fa-info-circle"></i> Bills Details</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="billsDate">Bills Date:</label>
-              <input type="date" id="billsDate" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="billsNumber">Bills Number:</label>
-              <input type="text" id="billsNumber" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="clientName">Client Name:</label>
-              <select id="clientName" class="form-control">
-                <option>Choose From Clients</option>
-              </select>
+  <!-- Sales Invoice Header -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5><i class="fas fa-info-circle"></i> Sales Invoice Details</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="salesInvoiceForm" (ngSubmit)="submitForm()">
+        <!-- Bill Date -->
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="billDate">Bill Date</label>
+            <input
+              type="date"
+              id="billDate"
+              class="form-control"
+              formControlName="billDate"
+            />
+            <!-- Validation -->
+            <div *ngIf="salesInvoiceForm.get('billDate')?.invalid && salesInvoiceForm.get('billDate')?.touched">
+              <small class="text-danger">Bill Date is required</small>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
 
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5><i class="fas fa-box"></i> Item Details</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="itemsName">Items Name:</label>
-              <select id="itemsName" class="form-control">
-                <option>Choose From Items</option>
-              </select>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="sellingPrice">Selling Price:</label>
-              <input type="text" id="sellingPrice" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="quantity">Quantity:</label>
-              <input type="text" id="quantity" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="total">Total:</label>
-              <input type="text" id="total" class="form-control" />
+          <!-- Bill Number -->
+          <div class="col-md-4 mb-3">
+            <label for="billsNumber">Bill Number</label>
+            <input
+              type="text"
+              id="billsNumber"
+              class="form-control"
+              formControlName="billsNumber"
+              readonly
+            />
+          </div>
+
+          <!-- Client Name -->
+          <div class="col-md-4 mb-3">
+            <label for="clientId">Client</label>
+            <select id="clientId" class="form-control" formControlName="clientId">
+              <option value="" disabled>Select Client</option>
+              <option *ngFor="let client of clients" [value]="client.id">
+                {{ client.name }}
+              </option>
+            </select>
+            <!-- Validation -->
+            <div *ngIf="salesInvoiceForm.get('clientId')?.invalid && salesInvoiceForm.get('clientId')?.touched">
+              <small class="text-danger">Client is required</small>
             </div>
           </div>
-          <button class="btn btn-success mt-3"><i class="fas fa-plus"></i> Add</button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- Table Section -->
-<div class="card mt-4 mb-4">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Item Code</th>
-          <th>Item Name</th>
-          <th>Unit</th>
-          <th>Quantity</th>
-          <th>Selling Price</th>
-          <th>Discount</th>
-          <th>Total</th>
-          <th>Balance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of addedItems">
-          <td>{{item.code}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.unit}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.sellingPrice}}</td>
-          <td>{{item.discount}}</td>
-          <td>{{item.total}}</td>
-          <td>{{item.balance}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Item Details Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5><i class="fas fa-box"></i> Item Details</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="itemForm" (ngSubmit)="addItem()">
+        <div class="row">
+          <!-- Item -->
+          <div class="col-md-4 mb-3">
+            <label for="item">Item</label>
+            <select
+              id="item"
+              class="form-control"
+              formControlName="item"
+              (change)="onItemSelected()"
+            >
+              <option value="" disabled>Select Item</option>
+              <option *ngFor="let item of items" [value]="item.id">
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Quantity -->
+          <div class="col-md-4 mb-3">
+            <label for="quantity">Quantity</label>
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              formControlName="quantity"
+            />
+          </div>
+
+          <!-- Selling Price -->
+          <div class="col-md-4 mb-3">
+            <label for="sellingPrice">Selling Price</label>
+            <input
+              type="number"
+              id="sellingPrice"
+              class="form-control"
+              formControlName="sellingPrice"
+              readonly
+            />
+          </div>
+
+          <!-- Total -->
+          <div class="col-md-4 mb-3">
+            <label for="total">Total</label>
+            <input
+              type="number"
+              id="total"
+              class="form-control"
+              formControlName="total"
+              readonly
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3" [disabled]="itemForm.invalid">
+          <i class="fas fa-plus"></i> Add Item
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Added Items Table -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5><i class="fas fa-list"></i> Added Items</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Selling Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of addedItems">
+            <td>{{ item.itemId }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.sellingPrice }}</td>
+            <td>{{ item.total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Payment Details Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5><i class="fas fa-money-bill-wave"></i> Payment Details</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="salesInvoiceForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <!-- Bills Total -->
+          <div class="col-md-4 mb-3">
+            <label for="billsTotal">Bills Total</label>
+            <input
+              type="number"
+              id="billsTotal"
+              class="form-control"
+              formControlName="billsTotal"
+              readonly
+            />
+          </div>
+
+          <!-- Discount Percentage -->
+          <div class="col-md-4 mb-3">
+            <label for="discountPercentage">Discount Percentage</label>
+            <input
+              type="number"
+              id="discountPercentage"
+              class="form-control"
+              formControlName="discountPercentage"
+            />
+            <!-- Validation -->
+            <div *ngIf="salesInvoiceForm.get('discountPercentage')?.hasError('min')">
+              <small class="text-danger">Discount must be greater than or equal to 0.</small>
+            </div>
+          </div>
+
+          <!-- Discount Value -->
+          <div class="col-md-4 mb-3">
+            <label for="discountValue">Discount Value</label>
+            <input
+              type="number"
+              id="discountValue"
+              class="form-control"
+              formControlName="discountValue"
+            />
+          </div>
+
+          <!-- Net -->
+          <div class="col-md-4 mb-3">
+            <label for="net">Net</label>
+            <input
+              type="number"
+              id="net"
+              class="form-control"
+              formControlName="net"
+              readonly
+            />
+          </div>
+
+          <!-- Paid Up -->
+          <div class="col-md-4 mb-3">
+            <label for="paidUp">Paid Up</label>
+            <input
+              type="number"
+              id="paidUp"
+              class="form-control"
+              formControlName="paidUp"
+            />
+            <!-- Validation -->
+            <div *ngIf="salesInvoiceForm.get('paidUp')?.hasError('min')">
+              <small class="text-danger">Paid up must be greater than or equal to 0.</small>
+            </div>
+          </div>
+
+          <!-- The Rest -->
+          <div class="col-md-4 mb-3">
+            <label for="theRest">The Rest</label>
+            <input
+              type="number"
+              id="theRest"
+              class="form-control"
+              formControlName="theRest"
+              readonly
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="salesInvoiceForm.invalid">
+          <i class="fas fa-save"></i> Submit Invoice
+        </button>
+      </form>
+    </div>
   </div>
 </div>
-
-    <!-- Other Details Card -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5><i class="fas fa-list-alt"></i> Other Details</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="billsTotal">Bills Total:</label>
-              <input type="text" id="billsTotal" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="percentageDiscount">Percentage Discount:</label>
-              <input type="text" id="percentageDiscount" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="valueDiscount">Value Discount:</label>
-              <input type="text" id="valueDiscount" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="theNet">The Net:</label>
-              <input type="text" id="theNet" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="paidUp">Paid Up:</label>
-              <input type="text" id="paidUp" class="form-control" />
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="theRest">The Rest:</label>
-              <input type="text" id="theRest" class="form-control" />
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- Request A Form Card -->
-    <div class="card mb-4">
-        <div class="card-header">
-        <h5><i class="fas fa-file"></i> Request A Form</h5>
-        </div>
-        <div class="card-body">
-          <form [formGroup]="requestForm">
-            <div class="row mb-3">
-              <!-- Employee Name -->
-              <div class="col-md-12">
-                <label for="employeeName" class="form-label">Employee Name</label>
-                <select id="employeeName" formControlName="employeeName" class="form-select">
-                  <option value="">Choose Employee</option>
-                  <option value="Tasneem Saleh">Tasneem Saleh</option>
-                  <!-- Add more employee options here -->
-                </select>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <!-- Date -->
-              <div class="col-md-12">
-                <label for="date" class="form-label">Date</label>
-                <input type="date" id="date" formControlName="date" class="form-control">
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <!-- Start Time -->
-              <div class="col-md-6">
-                <label for="startTime" class="form-label">Start Time</label>
-                <input type="time" id="startTime" formControlName="startTime" class="form-control">
-              </div>
-
-              <!-- End Time -->
-              <div class="col-md-6">
-                <label for="endTime" class="form-label">End Time</label>
-                <input type="time" id="endTime" formControlName="endTime" class="form-control">
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 d-flex justify-content-end">
-                <!-- Cancel Button -->
-                <button type="button" class="btn btn-danger me-2" (click)="resetForm()">
-                  <i class="fas fa-times"></i> Cancel
-                </button>
-
-                <!-- Save Button -->
-                <button type="button" class="btn btn-success">
-                  <i class="fas fa-save"></i> Save
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-

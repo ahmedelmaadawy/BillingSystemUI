@@ -1,46 +1,114 @@
+/* Container styling */
+body{
+  position: relative;
+}
 .container {
   max-width: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%,-70%);
 }
 
+.router button{
+  position: absolute;
+  top: 48%;
+  right: 50px;
+  background-color: #2babbf;
+  border-radius: 5px;
+  color: white;
+}
+
+/* Card styling */
 .card {
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .card-header {
-  background-color: #f8f9fa;
+  background-color: #2cacbf;
+  /* Primary color */
+  color: white;
   border-bottom: 1px solid #ddd;
   padding: 20px;
+  border-radius: 10px 10px 0 0;
 }
 
 .card-title {
   font-size: 24px;
   font-weight: bold;
+  margin: 0;
 }
 
 .card-body {
   padding: 30px;
+  background-color: #f8f9fa;
+  /* Light background for contrast */
+  border-radius: 0 0 10px 10px;
 }
 
+/* Form group label styling */
 .form-group label {
   font-weight: bold;
+  color: #27374e;
+  /* Darker color for text contrast */
 }
 
+/* Form control (input, select, textarea) styling */
 .form-control {
   border-radius: 5px;
   box-shadow: none;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.form-control:focus {
+  border-color: #2cacbf;
+  /* Primary color on focus */
+  box-shadow: 0 0 5px rgba(44, 172, 191, 0.3);
+  /* Softer focus shadow */
+}
+
+/* Button styling */
 .btn-success {
-  background-color: #28a745;
+  background-color: #2cacbf;
+  /* Primary color */
   border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #238fa2;
+  /* Slightly darker on hover */
 }
 
 .btn-danger {
   background-color: #dc3545;
   border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  /* Darker red on hover */
 }
 
 .btn i {
   margin-right: 5px;
+}
+
+/* General spacing */
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
 }

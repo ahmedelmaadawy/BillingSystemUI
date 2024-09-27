@@ -12,7 +12,7 @@ h3{
     font-weight: bold;
 }
 table{
-    margin: 60px 0 0 0 ;
+    margin: 20px 0 0 0 ;
 }
 thead tr td{
   background-color: #2babbf !important;
@@ -26,8 +26,8 @@ tbody tr td{
 }
 
 tbody tr td i{
-    margin: 0 5px;
-    font-size: 18px;
+    margin: 0 8px;
+    font-size: 20px;
     cursor: pointer;
 }
 .actions-buttons > *:focus{
@@ -36,4 +36,20 @@ tbody tr td i{
 }
 .actions-buttons > *:not(:focus) {
     background-color: white;
+}
+
+tr td i{
+  display: inline-block;
+}
+.EditIcon{
+  color: rgb(41, 55, 205);
+}
+.DeleteIcon{
+  color: rgb(230, 0, 0);
+}
+
+.router{
+  margin-top: 40px;
+  background-color: #2babbf;
+
 }
