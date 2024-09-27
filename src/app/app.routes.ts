@@ -21,6 +21,7 @@ import { TypesListComponent } from './Components/types-list/types-list.component
 import { ItemsListComponent } from './Components/items-list/items-list.component';
 import { EditItemComponent } from './Components/edit-item/edit-item.component';
 import { LoginComponent } from './Components/login/login.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -53,4 +54,5 @@ export const routes: Routes = [
     title: 'StorageReport',
   },
   { path: 'login', component: LoginComponent, title: 'Login' },
+  {path:'invoice-details/:id',component:InvoiceDetailsComponent,title:'InvoiceDetails'}
 ];

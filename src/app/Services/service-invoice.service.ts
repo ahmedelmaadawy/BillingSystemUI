@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IInvoice } from '../Models/IInvoice';
+import { IInvoiceDetails } from '../Models/IInvoiceDetails';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,8 @@ export class InvoiceServiceService {
   }
 
   // Get invoice by ID
-  getInvoiceById(id: number): Observable<IInvoice> {
-    return this.http.get<IInvoice>(`${this.apiUrl}/${id}`);
+  getInvoiceById(id: number): Observable<IInvoiceDetails> {
+    return this.http.get<IInvoiceDetails>(`${this.apiUrl}/${id}`);
   }
 
   // Edit an existing invoice by ID
