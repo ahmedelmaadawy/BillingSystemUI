@@ -1,5 +1,4 @@
 import { ItemService } from './../../Services/item.service';
-import { response } from 'express';
 import { InvoiceServiceService } from './../../Services/service-invoice.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -10,10 +9,11 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { IItemInvoice, IInvoice } from '../../Models/IInvoice';
+import { IInvoice } from '../../Models/IInvoice';
 import { IClient } from '../../Models/IClient';
 import { ClientService } from '../../Services/client.service';
 import { IItem } from '../../Models/IItem';
+
 
 @Component({
   selector: 'app-sales-invoice',
@@ -25,10 +25,15 @@ import { IItem } from '../../Models/IItem';
 export class SalesInvoiceComponent implements OnInit {
   salesInvoiceForm: FormGroup;
   itemForm: FormGroup;
-  addedItems: Array<IItemInvoice> = [];
-  clients: IClient[]=[];
-  items: IItem[]=[];
-  // item?: IItemInvoice[];
+  addedItems: Array<{
+    itemId: number;
+    invoiceId: number;
+    quantity: number;
+    total: number;
+    sellingPrice: number;
+  }> = [];
+  clients: IClient[] = [];
+  items: IItem[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -37,9 +42,9 @@ export class SalesInvoiceComponent implements OnInit {
     private _itemService: ItemService
   ) {
     this.salesInvoiceForm = this.fb.group({
-      billDate: [{value:''},Validators.required ],
+      billDate: [{ value: '', disabled: false }, Validators.required],
       billsNumber: [{ value: '', disabled: true }, Validators.required],
-      clientName: ['', Validators.required],
+      clientId: ['', Validators.required],
       billsTotal: [{ value: '', disabled: true }, Validators.required],
       discountPercentage: ['', [Validators.min(0)]],
       discountValue: ['', [Validators.min(0)]],
@@ -60,10 +65,7 @@ export class SalesInvoiceComponent implements OnInit {
     this.generateBillNumber();
 
     this._clientService.GetClients().subscribe({
-      next: (response) => {
-        this.clients = response;
-        console.log(this.clients);
-      },
+      next: (response) => (this.clients = response),
     });
 
     this._itemService.getAllItems().subscribe({
@@ -77,14 +79,17 @@ export class SalesInvoiceComponent implements OnInit {
     this.itemForm.get('sellingPrice')?.valueChanges.subscribe(() => {
       this.calculateTotal();
     });
+
     this.salesInvoiceForm.get('paidUp')?.valueChanges.subscribe(() => {
       this.calculateRest();
     });
+
     this.salesInvoiceForm
       .get('discountPercentage')
       ?.valueChanges.subscribe(() => {
         this.calculateNet();
       });
+
     this.salesInvoiceForm.get('discountValue')?.valueChanges.subscribe(() => {
       this.calculateNet();
     });
@@ -101,18 +106,27 @@ export class SalesInvoiceComponent implements OnInit {
     const total = quantity * sellingPrice;
     this.itemForm.get('total')?.setValue(total);
   }
+
   addItem() {
-    const item = this.itemForm.getRawValue() as IItemInvoice;
+    const item = {
+      itemId: this.itemForm.get('item')?.value,
+      invoiceId: 0, // Invoice ID will be updated when submitted to the server
+      quantity: this.itemForm.get('quantity')?.value,
+      total: this.itemForm.get('total')?.value,
+      sellingPrice: this.itemForm.get('sellingPrice')?.value,
+    };
     this.addedItems.push(item);
-    console.log(this.addedItems);
     this.itemForm.reset();
     this.calculateBillsTotal();
   }
 
   onItemSelected() {
-    const selectedItem = this.itemForm.get('item')?.value;
-    if (selectedItem) {
-      this.itemForm.get('sellingPrice')?.setValue(selectedItem.sellingPrice);
+    const selectedItemId = this.itemForm.get('item')?.value;
+    if (selectedItemId) {
+      const selectedItem = this.items.find((item) => item.id === +selectedItemId);
+      if (selectedItem) {
+        this.itemForm.get('sellingPrice')?.setValue(selectedItem.sellingPrice);
+      }
     }
   }
 
@@ -120,14 +134,22 @@ export class SalesInvoiceComponent implements OnInit {
     if (this.salesInvoiceForm.valid) {
       const invoice: IInvoice = {
         ...this.salesInvoiceForm.value,
-        items: this.addedItems,
+        employeeId: 1, 
+        itemInvoices: this.addedItems.map(item => ({
+          itemId: item.itemId,
+          invoiceId: 0, 
+          quantity: item.quantity,
+          total: item.total,
+          sellingPrice: item.sellingPrice,
+        })),
       };
-      console.log(invoice);
+  
       this.invoiceService.postInvoice(invoice).subscribe(
         (response) => {
           console.log('Invoice submitted successfully:', response);
           this.salesInvoiceForm.reset();
           this.addedItems = [];
+          this.generateBillNumber(); 
         },
         (error) => {
           console.error('Error submitting invoice:', error);
@@ -138,10 +160,13 @@ export class SalesInvoiceComponent implements OnInit {
       alert('Form is invalid');
     }
   }
+  
+
   calculateBillsTotal() {
     const total = this.addedItems.reduce((acc, item) => acc + item.total, 0);
     this.salesInvoiceForm.get('billsTotal')?.setValue(total);
   }
+
   calculateNet() {
     const billsTotal = this.salesInvoiceForm.get('billsTotal')?.value;
     const discountPercentage =
