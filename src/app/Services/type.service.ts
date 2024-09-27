@@ -9,26 +9,26 @@ import { IType } from '../Models/IType';
 export class TypeService {
   constructor(private httpClient: HttpClient) {}
   getAllTypes(): Observable<IType[]> {
-    return this.httpClient.get<IType[]>(`https://localhost:7156/api/Type`);
+    return this.httpClient.get<IType[]>(`https://localhost:44357/api/Type`);
   }
   GetTypeById(id: number): Observable<IType> {
-    return this.httpClient.get<IType>(`https://localhost:7156/api/Type/${id}`);
+    return this.httpClient.get<IType>(`https://localhost:44357/api/Type/${id}`);
   }
   addType(type: IType): Observable<IType> {
     return this.httpClient.post<IType>(
-      `https://localhost:7156/api/Type`,
+      `https://localhost:44357/api/Type`,
       type
     );
   }
   editType(id: number, type: IType): Observable<any> {
     return this.httpClient.put<any>(
-      `https://localhost:7156/api/type/${id}`,
+      `https://localhost:44357/api/type/${id}`,
       type
     );
   }
   deleteType(id: number) {
     return this.httpClient.delete<void>(
-      `https://localhost:7156/api/type/${id}`
+      `https://localhost:44357/api/type/${id}`
     );
   }
 }

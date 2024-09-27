@@ -17,7 +17,7 @@ export class ClientModule {}
   providedIn: 'root',
 })
 export class ClientService {
-  private apiUrl = 'https://localhost:7156/api/Client';
+  private apiUrl = 'https://localhost:44357/api/Client';
 
   constructor(private http: HttpClient) {}
 
