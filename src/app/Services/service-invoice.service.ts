@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IInvoice } from '../Models/IInvoice';
 import { IInvoiceReport } from '../Models/IInvoiceReport';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceServiceService {
-  private apiUrl = 'https://localhost:44357/api/invoice';
+  private apiUrl = `${environment.baseUrl}/api/invoice`;
 
   constructor(private http: HttpClient) {}
 
