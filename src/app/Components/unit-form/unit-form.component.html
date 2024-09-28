@@ -25,9 +25,29 @@
             }
           }
         </div>
+        <!-- **************************************************************************** -->
+                                  <!-- here ma3adawy -->
+      <div class="mb-3">
+          <label for="note" class="form-label"> Notes</label>
+          @if(selectedUnit?.id!=0){
+            <input type="text"  formControlName="note"  class="form-control" id="note" name="note" value="{{selectedUnit?.name}}" required>
+          }@else {
+            <input type="text"  formControlName="note"  class="form-control" id="note" name="note" required>
+          }
+          @if (UnitForm.get("name")?.errors && UnitForm.get("name")?.touched) {
+            @if (UnitForm.get("name")?.getError("required")) {
+              <p class=" text-danger">Name is required</p>
+            }
+            @if (UnitForm.get("name")?.getError("minlength")) {
+              <p class=" text-danger">Minimum Number of words is 3</p>
+            }
+            @if (UnitForm.get("name")?.getError("maxlength")) {
+              <p class=" text-danger">Maximum Number of words is 200</p>
+            }
+          }
+        </div>
 
       <div class="btns">
-        <!-- <input type="submit" [value]="UnitId == 0 ? 'Add Unit' : 'Update Unit'" class="btn submit"> -->
         <button type="submit" class="btn submit" >{{!isUpdate ? 'Add Unit' : 'Update Unit'}} </button>
       </div>
 
