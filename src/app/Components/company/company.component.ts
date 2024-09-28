@@ -8,25 +8,36 @@ import {
   Validators,
 } from '@angular/forms';
 import { ICompany } from '../../Models/ICompany';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, RouterLinkActive,CommonModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+  ],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css',
 })
-export class CompanyComponent implements OnInit{
+export class CompanyComponent implements OnInit {
   companies?: ICompany[];
   id: number = 0;
   isUpdate: boolean = false;
   constructor(
     private _companyService: CompanyServiceService,
     private router: Router,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -37,11 +48,14 @@ export class CompanyComponent implements OnInit{
     if (this.isUpdate) {
       this._companyService.GetCompanyById(this.id).subscribe({
         next: (response) => {
-          this.CompanyForm.patchValue({name : response.name , note : response.note})
+          this.CompanyForm.patchValue({
+            name: response.name,
+            note: response.note,
+          });
         },
         error: (err) => {
           alert(err);
-        }
+        },
       });
     }
   }
@@ -64,47 +78,29 @@ export class CompanyComponent implements OnInit{
       this._companyService.addCompany(this.CompanyForm.value).subscribe({
         next: (response) => {
           Swal.fire({
-            title: 'Saved Successfully',
+            title: 'Company Saved Successfully',
             icon: 'success',
             confirmButtonText: 'OK',
           });
           this.router.navigateByUrl('/company-list');
-        },
-        error: (err) => {
-          console.log(this.CompanyForm.value);
-          console.log(err);
-          Swal.fire({
-            title: 'Error Please Enter a valid values',
-            text:'company name must be unique',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
         },
       });
     }
   }
-  editCompany(){
+  editCompany() {
     if (this.CompanyForm.valid) {
-      this._companyService.editCompany(this.id , this.CompanyForm.value).subscribe({
-        next: (response:any) => {
-          Swal.fire({
-            title: 'Updated Successfully',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-          this.router.navigateByUrl('/company-list');
-        },
-        error: (err:any) => {
-          console.log(this.CompanyForm.value);
-          console.log(err);
-          Swal.fire({
-            title: 'Error Please Enter a valid values',
-            text: 'company name must be unique',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        },
-      });
+      this._companyService
+        .editCompany(this.id, this.CompanyForm.value)
+        .subscribe({
+          next: (response: any) => {
+            Swal.fire({
+              title: 'Company Updated Successfully',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
+            this.router.navigateByUrl('/company-list');
+          },
+        });
     }
   }
 }

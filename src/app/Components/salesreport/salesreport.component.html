@@ -21,6 +21,12 @@
           type="date"
           formControlName="to"
         />
+        <div *ngIf="reportForm.hasError('dateRangeInvalid')">
+          <span style="color: red"
+            >From date must be earlier than To date.</span
+          >
+        </div>
+
         <button
           style="
             display: block;
@@ -28,6 +34,7 @@
             background-color: #2babbf;
             width: 150px;
           "
+          [disabled]="reportForm.invalid"
           class="btn btn-success"
         >
           Enter
@@ -36,16 +43,32 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Bills Date</th>
+            <th>Client Name</th>
             <th>Bills Number</th>
-            <th>Client Name</th>
-            <th>Item Name</th>
-            <th>Selling Price</th>
-            <th>Quantity</th>
-            <th>Client Name</th>
+            <th>Bills Date</th>
+            <th>Bill Total</th>
+            <th>Net Value</th>
+            <th>Details</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          @for (item of report; track item.id) {
+          <tr>
+            <td>{{ item.clientName }}</td>
+            <td>{{ item.billNumber }}</td>
+            <td>{{ item.billDate }}</td>
+            <td>{{ item.billsTotal }}</td>
+            <td>{{ item.net }}</td>
+            <td>
+              <a
+                class="btn btn-success"
+                [routerLink]="['/invoice-details', item.id]"
+                >Details</a
+              >
+            </td>
+          </tr>
+          }
+        </tbody>
       </table>
     </div>
   </div>

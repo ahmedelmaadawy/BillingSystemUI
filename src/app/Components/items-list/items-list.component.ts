@@ -18,31 +18,19 @@ export class ItemsListComponent {
     this.itemService.getAllItems().subscribe({
       next: (response) => {
         this.items = response;
-        console.log(this.items)
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
-  
+
   deleteItem(id: number) {
     this.itemService.deleteItem(id).subscribe({
       next: (response) => {
         Swal.fire({
-          title: 'Company Deleted Successfully',
+          title: 'Item Deleted Successfully',
           icon: 'success',
           confirmButtonText: 'OK',
         });
         this.items = this.items?.filter((c) => c.id != id);
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire({
-          title: 'Error Happened',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
       },
     });
   }

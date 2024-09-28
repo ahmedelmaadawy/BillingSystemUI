@@ -1,4 +1,3 @@
-import { IItem } from './IItem';
 export interface IInvoiceReport {
   id: number;
   billDate: string;
@@ -7,6 +6,7 @@ export interface IInvoiceReport {
   discountValue: number;
   discountPercentage: number;
   billsTotal: number;
-  ClinetName: string;
+  clientName: string;
+  billNumber: number;
   items: { itemName: string; quantity: number; total: number }[];
 }

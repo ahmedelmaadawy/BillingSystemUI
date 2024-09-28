@@ -11,7 +11,7 @@ export class UnitService {
   constructor(private httpClient: HttpClient) {}
 
   getAllUnits(): Observable<IUnit[]> {
-    return this.httpClient.get<IUnit[]>(`${environment.baseUrl}/api/Unit`); //*******//
+    return this.httpClient.get<IUnit[]>(`${environment.baseUrl}/api/Unit`);
   }
 
   GetUnitById(id: number): Observable<IUnit> {

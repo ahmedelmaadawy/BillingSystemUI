@@ -1,7 +1,18 @@
 import { UnitService } from './../../Services/unit.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { CompanyServiceService } from './../../Services/company-service.service';
 import { ItemService } from './../../Services/item.service';
 import { TypeService } from './../../Services/type.service';
@@ -11,19 +22,27 @@ import { IItem } from './../../Models/IItem';
 import { CommonModule } from '@angular/common';
 import { IUnit } from '../../Models/iunit';
 import { error } from 'console';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-item',standalone: true,
+  selector: 'app-item',
+  standalone: true,
   templateUrl: './item.component.html',
-  imports:[ReactiveFormsModule,CommonModule,RouterLink,RouterLinkActive,FormsModule],
-  styleUrls: ['./item.component.css']
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    FormsModule,
+  ],
+  styleUrls: ['./item.component.css'],
 })
 export class ItemComponent implements OnInit {
   ItemForm: FormGroup;
   companies: ICompany[] = [];
   types: IType[] = [];
-  units :IUnit[] = [];
-  
+  units: IUnit[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,24 +50,29 @@ export class ItemComponent implements OnInit {
     private companyService: CompanyServiceService,
     private typeService: TypeService,
     private UnitService: UnitService,
-    private route :ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.ItemForm = this.formBuilder.group({
       companyId: ['', Validators.required],
       typeId: ['', Validators.required],
       name: ['', Validators.required],
-      availableQuantity: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      buyingPrice: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
-      sellingPrice: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
+      availableQuantity: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+$')],
+      ],
+      buyingPrice: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')],
+      ],
+      sellingPrice: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')],
+      ],
       unitId: ['', Validators.required],
       notes: [''],
-
     });
-
   }
-
   ngOnInit(): void {
-
     this.loadCompanies();
     this.loadTypes();
     this.loadUnits();
@@ -56,23 +80,19 @@ export class ItemComponent implements OnInit {
 
   loadCompanies(): void {
     this.companyService.getAllCompanies().subscribe(
-      (companies: ICompany[]) => this.companies = companies,
-      error => console.error('Error loading companies:', error)
+      (companies: ICompany[]) => (this.companies = companies),
     );
   }
 
   loadTypes(): void {
     this.typeService.getAllTypes().subscribe(
-      (types: IType[]) => this.types = types,
-      error => console.error('Error loading types:', error)
+      (types: IType[]) => (this.types = types),
     );
   }
 
-  loadUnits():void{
-
+  loadUnits(): void {
     this.UnitService.getAllUnits().subscribe(
-      (units:IUnit[]) => this.units=units  ,
-      error => console.error('Error loading units',error)
+      (units: IUnit[]) => (this.units = units),
     );
   }
   onSubmit(): void {
@@ -80,21 +100,23 @@ export class ItemComponent implements OnInit {
       // Map form values to the IItem structure
       const newItem: IItem = {
         ...this.ItemForm.value,
-        companyId: +this.ItemForm.value.companyId,  // Ensure IDs are numbers
+        companyId: +this.ItemForm.value.companyId, // Ensure IDs are numbers
         typeId: +this.ItemForm.value.typeId,
         unitId: +this.ItemForm.value.unitId,
-        availableQyantity: +this.ItemForm.value.availableQuantity        ,
+        availableQyantity: +this.ItemForm.value.availableQuantity,
         buyingPrice: +this.ItemForm.value.buyingPrice,
-        sellingPrice: +this.ItemForm.value.sellingPrice
+        sellingPrice: +this.ItemForm.value.sellingPrice,
       };
-      console.log('Saving item:', newItem);
       this.itemService.addItem(newItem).subscribe({
         next: () => {
-          console.log('Item added successfully');
+          Swal.fire({
+            title: 'Item Saved Successfully',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
           this.router.navigate(['/items']);
-          this.ItemForm.reset();  // Reset form after successful submission
+          this.ItemForm.reset(); // Reset form after successful submission
         },
-        error :(error)=> console.error('Error saving item:', error)
       });
     }
   }
