@@ -15,6 +15,7 @@ import { IClient } from '../../Models/IClient';
 import { ClientService } from '../../Services/client.service';
 import { IItem } from '../../Models/IItem';
 import Swal from 'sweetalert2';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -31,6 +32,7 @@ export class SalesInvoiceComponent implements OnInit {
   total: number = 0;
 
   addedItems: Array<{
+    itemName: string;
     itemId: number;
     invoiceId: number;
     quantity: number;
@@ -121,14 +123,27 @@ export class SalesInvoiceComponent implements OnInit {
   addItem() {
     const item = {
       itemId: this.itemForm.get('item')?.value,
-      invoiceId: 0, // Invoice ID will be updated when submitted to the server
+      invoiceId: 0,
+      itemName: this.items.filter(
+        (i) => i.id == this.itemForm.get('item')?.value
+      )[0].name,
       quantity: this.itemForm.get('quantity')?.value,
       total: this.itemForm.get('total')?.value,
       sellingPrice: this.itemForm.get('sellingPrice')?.value,
     };
-    this.addedItems.push(item);
-    this.itemForm.reset();
-    this.calculateBillsTotal();
+    let selectedItem = this.items.filter((i) => i.id == item.itemId)[0];
+    if (item.quantity > selectedItem.availableQyantity) {
+      Swal.fire({
+        title: `Error`,
+        text:`You exceeded the available quantity for the item ${item.itemName} the available quantity is ${selectedItem.availableQyantity}`,
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    } else {
+      this.addedItems.push(item);
+      this.itemForm.reset();
+      this.calculateBillsTotal();
+    }
   }
 
   onItemSelected() {
@@ -159,15 +174,20 @@ export class SalesInvoiceComponent implements OnInit {
           sellingPrice: item.sellingPrice,
         })),
       };
-      this.invoiceService.postInvoice(invoice).subscribe((response) => {
-        Swal.fire({
-          title: 'Invoice Saved Successfully',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        });
-        this.salesInvoiceForm.reset();
-        this.addedItems = [];
-        this.generateBillNumber();
+      this.invoiceService.postInvoice(invoice).subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: 'Invoice Saved Successfully',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          this.salesInvoiceForm.reset();
+          this.addedItems = [];
+          this.generateBillNumber();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     } else {
       Swal.fire({

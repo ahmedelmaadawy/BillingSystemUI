@@ -17,7 +17,12 @@
               formControlName="billDate"
             />
             <!-- Validation -->
-            <div *ngIf="salesInvoiceForm.get('billDate')?.invalid && salesInvoiceForm.get('billDate')?.touched">
+            <div
+              *ngIf="
+                salesInvoiceForm.get('billDate')?.invalid &&
+                salesInvoiceForm.get('billDate')?.touched
+              "
+            >
               <small class="text-danger">Bill Date is required</small>
             </div>
           </div>
@@ -37,14 +42,23 @@
           <!-- Client Name -->
           <div class="col-md-4 mb-3">
             <label for="clientId">Client</label>
-            <select id="clientId" class="form-control" formControlName="clientId">
+            <select
+              id="clientId"
+              class="form-control"
+              formControlName="clientId"
+            >
               <option value="" disabled>Select Client</option>
               <option *ngFor="let client of clients" [value]="client.id">
                 {{ client.name }}
               </option>
             </select>
             <!-- Validation -->
-            <div *ngIf="salesInvoiceForm.get('clientId')?.invalid && salesInvoiceForm.get('clientId')?.touched">
+            <div
+              *ngIf="
+                salesInvoiceForm.get('clientId')?.invalid &&
+                salesInvoiceForm.get('clientId')?.touched
+              "
+            >
               <small class="text-danger">Client is required</small>
             </div>
           </div>
@@ -96,7 +110,6 @@
               id="sellingPrice"
               class="form-control"
               formControlName="sellingPrice"
-              readonly
             />
           </div>
 
@@ -113,11 +126,17 @@
           </div>
         </div>
 
-        <button type="submit"
-        class="btn btn-success mt-3"
-        [disabled]="itemForm.invalid"
-        style="  background-color: #2babbf; width: 150px;">
-          <i class="fas fa-plus" style="margin-left: -20px;margin-right: 10px;"></i> Add Item
+        <button
+          type="submit"
+          class="btn btn-success mt-3"
+          [disabled]="itemForm.invalid"
+          style="background-color: #2babbf; width: 150px"
+        >
+          <i
+            class="fas fa-plus"
+            style="margin-left: -20px; margin-right: 10px"
+          ></i>
+          Add Item
         </button>
       </form>
     </div>
@@ -140,7 +159,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of addedItems">
-            <td>{{ item.itemId }}</td>
+            <td>{{ item.itemName }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.sellingPrice }}</td>
             <td>{{ item.total }}</td>
@@ -180,8 +199,14 @@
               formControlName="discountPercentage"
             />
             <!-- Validation -->
-            <div *ngIf="salesInvoiceForm.get('discountPercentage')?.hasError('min')">
-              <small class="text-danger">Discount must be greater than or equal to 0.</small>
+            <div
+              *ngIf="
+                salesInvoiceForm.get('discountPercentage')?.hasError('min')
+              "
+            >
+              <small class="text-danger"
+                >Discount must be greater than or equal to 0.</small
+              >
             </div>
           </div>
 
@@ -219,7 +244,9 @@
             />
             <!-- Validation -->
             <div *ngIf="salesInvoiceForm.get('paidUp')?.hasError('min')">
-              <small class="text-danger">Paid up must be greater than or equal to 0.</small>
+              <small class="text-danger"
+                >Paid up must be greater than or equal to 0.</small
+              >
             </div>
           </div>
 
@@ -236,11 +263,17 @@
           </div>
         </div>
 
-        <button type="submit"
-        class="btn btn-primary mt-3"
-        [disabled]="salesInvoiceForm.invalid"
-        style="  background-color: #2babbf; width: 180px;">
-          <i class="fas fa-save" style="margin-left: -5px;margin-right: 10px;"></i> Submit Invoice
+        <button
+          type="submit"
+          class="btn btn-primary mt-3"
+          [disabled]="salesInvoiceForm.invalid"
+          style="background-color: #2babbf; width: 180px"
+        >
+          <i
+            class="fas fa-save"
+            style="margin-left: -5px; margin-right: 10px"
+          ></i>
+          Submit Invoice
         </button>
       </form>
     </div>
