@@ -107,7 +107,7 @@ export class SalesInvoiceComponent implements OnInit {
     this.invoiceService.getAllInvoices().subscribe({
       next: (response) => {
         randomBillNumber = response.length;
-        this.billsNumber = response.length;
+        this.billsNumber = response.length + 1;
         this.salesInvoiceForm.get('billNumber')?.setValue(randomBillNumber + 1);
       },
     });

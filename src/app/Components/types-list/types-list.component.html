@@ -5,7 +5,7 @@
         <h3 class="types-heading mx-5">All Types</h3>
       </div>
       <div class="col-md-6 text-end">
-        <a class="types-button" [routerLink]="['/types',0]"> Add New Type </a>
+        <a class="types-button" [routerLink]="['/types', 0]"> Add New Type </a>
       </div>
     </div>
     <div class="types-table-container">
@@ -25,8 +25,16 @@
             <td>{{ item.note }}</td>
             <td>{{ item.companyName }}</td>
             <td class="types-action-icons">
-              <i class="fa-solid fa-edit text-warning" [routerLink]="['/types/', item.id]"></i>
-              <i class="fa-solid fa-trash text-danger" (click)="deleteType(item.id)"></i>
+              <i
+                class="fa-solid fa-edit"
+                style="color: rgb(41, 55, 205)"
+                [routerLink]="['/types/', item.id]"
+              ></i>
+              <i
+                class="fa-solid fa-trash"
+                style="color: rgb(230, 0, 0)"
+                (click)="deleteType(item.id)"
+              ></i>
             </td>
           </tr>
           }

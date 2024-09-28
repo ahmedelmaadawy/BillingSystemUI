@@ -25,23 +25,21 @@
             }
           }
         </div>
-        <!-- **************************************************************************** -->
-                                  <!-- here ma3adawy -->
       <div class="mb-3">
-          <label for="note" class="form-label"> Notes</label>
+          <label for="notes" class="form-label"> Notes</label>
           @if(selectedUnit?.id!=0){
-            <input type="text"  formControlName="note"  class="form-control" id="note" name="note" value="{{selectedUnit?.name}}" required>
+            <input type="text"  formControlName="notes"  class="form-control" id="note" name="note" value="{{selectedUnit?.name}}" required>
           }@else {
-            <input type="text"  formControlName="note"  class="form-control" id="note" name="note" required>
+            <input type="text"  formControlName="notes"  class="form-control" id="note" name="note" required>
           }
-          @if (UnitForm.get("name")?.errors && UnitForm.get("name")?.touched) {
-            @if (UnitForm.get("name")?.getError("required")) {
+          @if (UnitForm.get("notes")?.errors && UnitForm.get("note")?.touched) {
+            @if (UnitForm.get("notes")?.getError("required")) {
               <p class=" text-danger">Name is required</p>
             }
-            @if (UnitForm.get("name")?.getError("minlength")) {
+            @if (UnitForm.get("notes")?.getError("minlength")) {
               <p class=" text-danger">Minimum Number of words is 3</p>
             }
-            @if (UnitForm.get("name")?.getError("maxlength")) {
+            @if (UnitForm.get("notes")?.getError("maxlength")) {
               <p class=" text-danger">Maximum Number of words is 200</p>
             }
           }

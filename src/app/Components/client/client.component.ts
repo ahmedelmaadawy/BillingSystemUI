@@ -1,3 +1,4 @@
+import { response } from 'express';
 import { ClientService } from './../../Services/client.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -45,19 +46,29 @@ export class ClientComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^01[0152][0-9]{8}$/),
     ]),
+    number: new FormControl(''),
   });
   ngOnInit() {
     this.data.GetClientObj().subscribe({
       next: (response) => {
         if (response == null) {
           this.isclient = null;
+          this.clientService.GetClients().subscribe({
+            next: (response) => {
+              this.clientForm.patchValue({
+                number: response?.length+1 || 1,
+              });
+            },
+          });
         } else {
           this.isupdate = true;
           this.clientId = response.id;
+
           this.clientForm.patchValue({
             name: response?.name,
             address: response?.address,
             phoneNumber: response?.phoneNumber,
+            number: response?.number,
           });
         }
       },

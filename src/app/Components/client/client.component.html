@@ -18,10 +18,13 @@
                 }
               }
     </div>
-
+  <div class="mb-3">
+      <label for="number" class="form-label">Number</label>
+      <input formControlName="number" type="number" class="form-control" placeholder="Number" id="number"  readonly>
+    </div>
     <div class="mb-3">
       <label for="address" class="form-label">Address</label>
-      <input formControlName="address" type="text" class="form-control" id="address">
+      <input formControlName="address" type="text" class="form-control" id="address" placeholder="Address">
       @if (clientForm.get("address")?.errors && clientForm.get("address")?.touched) {
         @if (clientForm.get("address")?.getError("required")) {
           <p class=" text-danger">Address is required</p>

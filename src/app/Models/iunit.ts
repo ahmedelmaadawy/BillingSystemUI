@@ -1,5 +1,5 @@
 export interface IUnit {
   id:number;
   name:string;
-  // UnitNotes: string
+  notes: string
 }

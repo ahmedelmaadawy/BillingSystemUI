@@ -10,12 +10,14 @@
       <thead>
         <tr>
           <td>Name</td>
+          <td>Note</td>
           <td>Actions</td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let unit of UnitList">
           <td>{{ unit.name }}</td>
+          <td>{{ unit.notes }}</td>
           <td>
             <i
               class="fa-solid fa-edit EditIcon"

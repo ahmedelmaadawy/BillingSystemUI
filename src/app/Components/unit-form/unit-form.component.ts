@@ -60,6 +60,7 @@ export class UnitFormComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(20),
     ]),
+    notes: new FormControl('')
   });
   AddUnit() {
     this._unitService.addUnit(this.UnitForm.value).subscribe({
