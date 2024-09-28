@@ -12,7 +12,7 @@ body{
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  height: 400px;
+  height: 500px;
 }
 h3{
   text-align: center;
@@ -43,11 +43,14 @@ h3{
 }
 
 .goToList{
-  background-color: #2babbf !important;
+  background-color: #2babbf ;
   color: white;
   position: absolute;
   top: 50%;
   right: 20px;
+}
+.goToList:hover{
+  background-color: #1d8a9e;
 }
 
 .goToList i{

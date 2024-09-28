@@ -13,14 +13,14 @@ export class CompanyServiceService {
 
   getAllCompanies():Observable<ICompany[]> {
     return this.httpClient.get<ICompany[]>(
-      `https://localhost:44357/api/Company`
+      `https://localhost:7156/api/Company`
     );
   }
 
 
   GetCompanyById(id: number): Observable<ICompany>{
     return this.httpClient.get<ICompany>(
-      `https://localhost:44357/api/Company/${id}`
+      `https://localhost:7156/api/Company/${id}`
     );
   }
 

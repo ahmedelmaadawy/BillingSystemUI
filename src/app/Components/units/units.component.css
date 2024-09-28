@@ -17,7 +17,7 @@ table{
 thead tr td{
   background-color: #2babbf !important;
     color: white;
-    padding: 20px;
+    padding: 10px;
 }
 
 tbody tr td{
@@ -26,7 +26,7 @@ tbody tr td{
 }
 
 tbody tr td i{
-    margin: 0 8px;
+    margin: 0 7px;
     font-size: 20px;
     cursor: pointer;
 }

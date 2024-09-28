@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-md-6">
-        <h3 class="item-heading text-center">Items</h3>
+        <h3 class="item-heading ">Items</h3>
+        <a class="custom-button" routerLink="/items"> Add New item </a>
       </div>
 
     </div>
@@ -33,11 +34,13 @@
             <td>{{ item.type}}</td>
             <td>{{ item.company }}</td>
             <td class="action-icons">
-              <i class="fa-solid fa-edit text-warning"
+              <i class="fa-solid fa-edit"
+              style="  color: rgb(41, 55, 205); font-size: 20px;"
                 [routerLink]="['/editItem/', item.id ]"
               ></i>
               <i
-                class="fa-solid fa-delete-left text-danger"
+                class="fa-solid fa-delete-left"
+                style="  color: rgb(230, 0, 0); font-size: 20px;"
                 (click)="deleteItem(item.id)"
               ></i>
             </td>
@@ -49,9 +52,7 @@
     </div>
 
   </div>
-  <div class="col-md-10 mt-5 text-end">
-    <a class="custom-button" routerLink="/items"> Add New item </a>
-  </div>
+
 </div>
 
 

@@ -18,6 +18,9 @@ body{
   border-radius: 5px;
   color: white;
 }
+.router button:hover{
+  background-color: #1d8a9e;
+}
 
 /* Card styling */
 .card {
