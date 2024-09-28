@@ -1,28 +1,27 @@
-import { CompanyServiceService } from './../../Services/company-service.service';
-import { ICompany } from './../../Models/ICompany';
+import { response } from 'express';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
-import { IType } from '../../Models/IType';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CompanyServiceService } from '../../Services/company-service.service';
 import { TypeService } from '../../Services/type.service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
-import { noop } from 'rxjs';
+import { ICompany } from '../../Models/ICompany';
+import { CommonModule } from '@angular/common';
+import { IType } from '../../Models/IType';
 
 @Component({
   selector: 'app-types',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports:[CommonModule ,FormsModule ,ReactiveFormsModule,RouterLink],
   templateUrl: './types.component.html',
   styleUrls: ['./types.component.css'],
 })
 export class TypesComponent implements OnInit {
   typeForm: FormGroup;
   companies?: ICompany[];
-  types?: IType[];
   id: number = 0;
   isUpdate: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -36,6 +35,7 @@ export class TypesComponent implements OnInit {
       note: [''],
     });
   }
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = Number(params['id']);
@@ -46,15 +46,17 @@ export class TypesComponent implements OnInit {
       next: (response) => {
         this.companies = response;
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err);
+      },
     });
+
     if (this.isUpdate) {
       this._typeService.GetTypeById(this.id).subscribe({
         next: (response) => {
-          console.log(response);
-          let companyId = this.companies?.filter(
+          const companyId = this.companies?.filter(
             (c) => c.name == response.companyName
-          )[0].id;
+          )[0]?.id;
           this.typeForm.patchValue({
             companyId: companyId,
             name: response.name,
@@ -67,9 +69,9 @@ export class TypesComponent implements OnInit {
       });
     }
   }
+
   onSubmit(): void {
     if (this.typeForm.valid) {
-      console.log('Form Submitted:', this.typeForm.value);
       this._typeService.addType(this.typeForm.value).subscribe({
         next: () => {
           Swal.fire({
@@ -80,58 +82,39 @@ export class TypesComponent implements OnInit {
           });
           this.router.navigateByUrl('/types-list');
         },
-        error: (err) => {
+      });
+    }
+  }
+
+  editType(): void {
+    if (this.typeForm.valid) {
+      this._typeService.editType(this.id, this.typeForm.value).subscribe({
+        next: () => {
           Swal.fire({
-            icon: 'error',
-            title: 'Error In Database',
-            text: `Something went wrong! name must be unique`,
+            title: 'Saved Successfully',
+            text: 'Do you want to continue',
+            icon: 'success',
             confirmButtonText: 'OK',
           });
         },
       });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'In Valid form',
-        confirmButtonText: 'OK',
-      });
     }
   }
-  editType(): void {
-    // if (this.typeForm.valid) {
-    console.log(this.typeForm.value);
-    this._typeService.editType(this.id, this.typeForm.value).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Saved Successfully',
-          text: 'Do you want to continue',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        });
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error In Database',
-          text: `Something went wrong! name must be unique`,
-          confirmButtonText: 'OK',
-        });
-        console.log(err);
-      },
-    });
-    // } else {
-    //   Swal.fire({
-    //     icon: 'error',
-    //     title: 'In Valid form',
-    //     confirmButtonText: 'OK',
-    //   });
-    // }
-  }
+
   isTypeNameDuplicate(control: any): { [key: string]: boolean } | null {
-    const existingTypes = ['Type A', 'Type B'];
+    let existingTypes:IType[] = [];
+    this._typeService.getAllTypes().subscribe({
+      next: (response) => {
+        existingTypes = response;
+      }
+    });
     if (existingTypes.includes(control.value)) {
       return { duplicate: true };
     }
     return null;
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/types-list');
   }
 }

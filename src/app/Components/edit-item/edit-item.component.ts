@@ -1,3 +1,4 @@
+import { response } from 'express';
 import { UnitService } from './../../Services/unit.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -15,6 +16,7 @@ import { IType } from './../../Models/IType';
 import { IItem } from './../../Models/IItem';
 import { IUnit } from '../../Models/iunit';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-item',
@@ -64,15 +66,12 @@ export class EditItemComponent implements OnInit {
   ngOnInit(): void {
     this.companyService.getAllCompanies().subscribe(
       (companies: ICompany[]) => (this.companies = companies),
-      (error) => console.error('Error loading companies:', error)
     );
     this.typeService.getAllTypes().subscribe(
       (types: IType[]) => (this.types = types),
-      (error) => console.error('Error loading types:', error)
     );
     this.unitService.getAllUnits().subscribe(
       (units: IUnit[]) => (this.units = units),
-      (error) => console.error('Error loading units:', error)
     );
     // Get the ID from route params
     this.route.params.subscribe((params) => {
@@ -86,10 +85,8 @@ export class EditItemComponent implements OnInit {
     this.itemService.getItemById(id).subscribe({
       next: (response) => {
         this.selectedItem = response;
-        console.log(this.selectedItem);
-        this.patchFormWithSelectedItem(); // Patch the form with the selected item
+        this.patchFormWithSelectedItem();
       },
-      error: (error) => console.error('Error loading item:', error),
     });
   }
 
@@ -111,7 +108,6 @@ export class EditItemComponent implements OnInit {
       unitId: unitId,
       notes: this.selectedItem.note,
     });
-    console.log(this.ItemForm.value);
   }
 
   onSubmit(): void {
@@ -125,15 +121,16 @@ export class EditItemComponent implements OnInit {
         buyingPrice: +this.ItemForm.value.buyingPrice,
         sellingPrice: +this.ItemForm.value.sellingPrice,
       };
-
-      console.log('Saving item:', updatedItem);
-      this.itemService.editItem(this.selectedItemId, updatedItem).subscribe(
-        () => {
-          console.log('Item updated successfully');
-          this.router.navigate(['/items']); // Navigate back to item list
-          this.ItemForm.reset();
-        },
-        (error) => console.error('Error updating item:', error)
+      this.itemService.editItem(this.selectedItemId, updatedItem).subscribe({
+        next: (response) => {
+           Swal.fire({
+             title: 'Item Edited Successfully',
+             icon: 'success',
+             confirmButtonText: 'OK',
+           });
+        this.router.navigate(['/items']); // Navigate back to item list
+        this.ItemForm.reset();
+      },}
       );
     }
   }

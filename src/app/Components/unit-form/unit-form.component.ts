@@ -37,7 +37,6 @@ export class UnitFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  /**************************************************************************************** */
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.UnitId = Number(params['id']);
@@ -46,15 +45,11 @@ export class UnitFormComponent implements OnInit {
     if (this.UnitId > 0) {
       this._unitService.GetUnitById(this.UnitId).subscribe({
         next: (unit: IUnit) => {
-          this.selectedUnit = unit; // Assign the fetched unit to selectedUnit
-          console.log(this.selectedUnit); // Log the unit data for debugging
+          this.selectedUnit = unit;
+          console.log(this.selectedUnit);
           this.UnitForm.patchValue({
             name: this.selectedUnit.name,
           });
-        },
-        error: (err) => {
-          console.error('Error fetching unit by ID', err); // Log the error if fetching fails
-          alert('Error fetching unit');
         },
       });
     }
@@ -76,17 +71,7 @@ export class UnitFormComponent implements OnInit {
         }).then(() => {
           this.router.navigateByUrl('/home');
         });
-      },
-      error: (err) => {
-        console.log(this.UnitForm.value);
-        console.log(err);
-        Swal.fire({
-          title: 'Error Please Enter a valid values',
-          text: 'Unit name must be unique.',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      },
+      }
     });
   }
 
@@ -99,16 +84,6 @@ export class UnitFormComponent implements OnInit {
           confirmButtonText: 'OK',
         }).then(() => {
           this.router.navigateByUrl('/unit');
-        });
-      },
-      error: (err) => {
-        console.log(this.UnitForm.value);
-        console.log(err);
-        Swal.fire({
-          title: 'Error Please Enter a valid values',
-          text: 'Unit name must be unique.',
-          icon: 'error',
-          confirmButtonText: 'OK',
         });
       },
     });

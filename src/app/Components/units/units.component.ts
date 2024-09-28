@@ -4,6 +4,7 @@ import { UnitService } from '../../Services/unit.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 // import { EventEmitter } from 'stream';
 
 
@@ -25,27 +26,19 @@ UnitList?:IUnit[]=[];
       next: (data: IUnit[]) => {
         this.UnitList = data;
       },
-      error: (err) => {
-        console.error('Error fetching units', err);
-        alert("ERROR");
-      },
-      complete: () => {
-        console.log('Unit fetching complete');
-      }
     });
   }
 
   deleteProductHandler(UnitId: number) {
     this._unitService.deleteUnit(UnitId).subscribe({
       next: () => {
-        // Remove the deleted unit from the local UnitList array
         this.UnitList = this.UnitList?.filter(unit => unit.id !== UnitId);
-        alert('Unit deleted successfully');
+          Swal.fire({
+            title: 'Unit Deleted Successfully',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
       },
-      error: (err) => {
-        console.error('Error deleting unit:', err);
-        alert('Error deleting unit');
-      }
     });
   }
 

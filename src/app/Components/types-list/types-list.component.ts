@@ -20,9 +20,6 @@ export class TypesListComponent implements OnInit {
       next: (response) => {
         this.types = response;
       },
-      error: (err) => {
-        console.log(err);
-      },
     });
   }
   deleteType(id: number) {
@@ -35,14 +32,6 @@ export class TypesListComponent implements OnInit {
           confirmButtonText: 'OK',
         });
        this.types =  this.types?.filter((t) => t.id != id);
-      },
-      error: (err) => {
-        Swal.fire({
-          title: 'Something went wrong',
-          text: 'Check Your Internet connection',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
       },
     });
   }

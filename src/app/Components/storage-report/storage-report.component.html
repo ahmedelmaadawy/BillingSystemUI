@@ -4,10 +4,10 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Quantity</th>
-          <th>Type</th>
           <th>Company Name</th>
+          <th>Type</th>
           <th>Unit</th>
+          <th>Quantity</th>
           <th>Selling Price</th>
         </tr>
       </thead>
@@ -15,10 +15,10 @@
         @for (report of storageReport; track report.id) {
         <tr >
           <td>{{ report.name }}</td>
-          <td>{{ report.availableQyantity }}</td>
-          <td>{{ report.type }}</td>
           <td>{{ report.company }}</td>
+          <td>{{ report.type }}</td>
           <td>{{ report.unit }}</td>
+          <td>{{ report.availableQyantity }}</td>
           <td>{{ report.sellingPrice }}</td>
         </tr>}
       </tbody>

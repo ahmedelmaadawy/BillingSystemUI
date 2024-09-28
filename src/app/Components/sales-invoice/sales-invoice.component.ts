@@ -14,6 +14,7 @@ import { IInvoice } from '../../Models/IInvoice';
 import { IClient } from '../../Models/IClient';
 import { ClientService } from '../../Services/client.service';
 import { IItem } from '../../Models/IItem';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sales-invoice',
@@ -149,7 +150,6 @@ export class SalesInvoiceComponent implements OnInit {
         billNumber: this.billsNumber,
         billsTotal: this.total,
         ...this.salesInvoiceForm.value,
-
         employeeId: 1,
         itemInvoices: this.addedItems.map((item) => ({
           itemId: item.itemId,
@@ -159,22 +159,23 @@ export class SalesInvoiceComponent implements OnInit {
           sellingPrice: item.sellingPrice,
         })),
       };
-      console.log(this.salesInvoiceForm.value);
-      console.log(invoice);
-      this.invoiceService.postInvoice(invoice).subscribe(
-        (response) => {
-          console.log('Invoice submitted successfully:', response);
-          this.salesInvoiceForm.reset();
-          this.addedItems = [];
-          this.generateBillNumber();
-        },
-        (error) => {
-          console.error('Error submitting invoice:', error);
-        }
-      );
+      this.invoiceService.postInvoice(invoice).subscribe((response) => {
+        Swal.fire({
+          title: 'Invoice Saved Successfully',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        this.salesInvoiceForm.reset();
+        this.addedItems = [];
+        this.generateBillNumber();
+      });
     } else {
-      console.log(this.salesInvoiceForm.errors);
-      alert('Form is invalid');
+      Swal.fire({
+        title: 'Invalid values',
+        icon: 'error',
+        text: `${this.salesInvoiceForm.errors}`,
+        confirmButtonText: 'OK',
+      });
     }
   }
 

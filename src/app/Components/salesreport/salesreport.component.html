@@ -21,6 +21,12 @@
           type="date"
           formControlName="to"
         />
+        <div *ngIf="reportForm.hasError('dateRangeInvalid')">
+          <span style="color: red"
+            >From date must be earlier than To date.</span
+          >
+        </div>
+
         <button
           style="
             display: block;
@@ -28,6 +34,7 @@
             background-color: #2babbf;
             width: 150px;
           "
+          [disabled]="reportForm.invalid"
           class="btn btn-success"
         >
           Enter
@@ -55,7 +62,7 @@
             <td>
               <a
                 class="btn btn-success"
-                [routerLink]="['/invoice-details', item.id ]"
+                [routerLink]="['/invoice-details', item.id]"
                 >Details</a
               >
             </td>

@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { LoginService } from '../../Services/login.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -23,11 +24,9 @@ export class LoginComponent {
   LoginForm: FormGroup = new FormGroup({
     userName: new FormControl('', [
       Validators.required,
-      //*/
     ]),
     password: new FormControl('', [
       Validators.required,
-      //*/
     ]),
   });
   login() {
@@ -37,10 +36,13 @@ export class LoginComponent {
           localStorage.setItem('Token', response.token);
           this.route.navigateByUrl('/home');
         },
-        error: (err) => {
-        },
       });
     } else {
+         Swal.fire({
+           title: 'Check Your credintials',
+           icon: 'error',
+           confirmButtonText: 'OK',
+         });
     }
   }
 }

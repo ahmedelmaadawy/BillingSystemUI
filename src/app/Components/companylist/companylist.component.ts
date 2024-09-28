@@ -19,9 +19,6 @@ export class CompanylistComponent implements OnInit {
       next: (response) => {
         this.companies = response;
       },
-      error: (err) => {
-        console.log(err);
-      },
     });
   }
   deleteCompany(id: number) {
@@ -33,14 +30,6 @@ export class CompanylistComponent implements OnInit {
           confirmButtonText: 'OK',
         });
         this.companies = this.companies?.filter((c) => c.id != id);
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire({
-          title: 'Error Happened',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
       },
     });
   }

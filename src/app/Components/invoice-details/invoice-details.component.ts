@@ -25,8 +25,6 @@ export class InvoiceDetailsComponent implements OnInit {
         this.service.getInvoiceById(this.invoiceid).subscribe({
           next:(response)=>{
             this.invoice=response;
-            console.log(this.invoice);
-
           }
         })
       }
