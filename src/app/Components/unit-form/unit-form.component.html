@@ -8,8 +8,8 @@
       <!-- chnging "UnitName" into "name" to be suitable for api -->
       <div class="mb-3">
           <label for="name" class="form-label"> Unit Name</label>
-          @if(selectedUnit?.id!=0){
-            <input type="text"  formControlName="name"  class="form-control" id="name" name="name" value="{{selectedUnit?.name}}" required>
+          @if(isUpdate){
+            <input type="text"  formControlName="name"  class="form-control" id="name" name="name" value="{{selectedUnit.name}}" required>
           }@else {
             <input type="text"  formControlName="name"  class="form-control" id="name" name="name" required>
           }
@@ -27,8 +27,8 @@
         </div>
       <div class="mb-3">
           <label for="notes" class="form-label"> Notes</label>
-          @if(selectedUnit?.id!=0){
-            <input type="text"  formControlName="notes"  class="form-control" id="note" name="note" value="{{selectedUnit?.name}}" required>
+          @if(isUpdate){
+            <input type="text"  formControlName="notes"  class="form-control" id="note" name="note" value="{{selectedUnit.notes}}" required>
           }@else {
             <input type="text"  formControlName="notes"  class="form-control" id="note" name="note" required>
           }

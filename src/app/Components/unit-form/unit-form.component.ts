@@ -29,7 +29,7 @@ import { response } from 'express';
 })
 export class UnitFormComponent implements OnInit {
   units?: IUnit[];
-  selectedUnit: any;
+  selectedUnit: IUnit = {}as IUnit;
   UnitId: number = 0;
   isUpdate: boolean = false;
   constructor(
@@ -46,9 +46,10 @@ export class UnitFormComponent implements OnInit {
       this._unitService.GetUnitById(this.UnitId).subscribe({
         next: (unit: IUnit) => {
           this.selectedUnit = unit;
-          console.log(this.selectedUnit);
+
           this.UnitForm.patchValue({
             name: this.selectedUnit.name,
+            notes: this.selectedUnit.notes,
           });
         },
       });
@@ -60,7 +61,7 @@ export class UnitFormComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(20),
     ]),
-    notes: new FormControl('')
+    notes: new FormControl(''),
   });
   AddUnit() {
     this._unitService.addUnit(this.UnitForm.value).subscribe({
@@ -72,7 +73,7 @@ export class UnitFormComponent implements OnInit {
         }).then(() => {
           this.router.navigateByUrl('/home');
         });
-      }
+      },
     });
   }
 
@@ -83,9 +84,8 @@ export class UnitFormComponent implements OnInit {
           title: 'Unit Updated Successfully',
           icon: 'success',
           confirmButtonText: 'OK',
-        }).then(() => {
-          this.router.navigateByUrl('/unit');
         });
+          this.router.navigateByUrl('/unit');
       },
     });
   }

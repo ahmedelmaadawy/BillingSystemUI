@@ -3,7 +3,6 @@ import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
 export const customInterceptor: HttpInterceptorFn = (
@@ -17,7 +16,6 @@ export const customInterceptor: HttpInterceptorFn = (
       })
     : req;
   const router = inject(Router);
-  const snackBar = inject(MatSnackBar);
   return next(clonedRequest).pipe(
     catchError((error) => {
       if (error.status === 401) {
@@ -30,7 +28,7 @@ export const customInterceptor: HttpInterceptorFn = (
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: `Error: ${errorMessage}`, // You can customize this message
+          text: `Error: ${errorMessage}`, 
           confirmButtonText: 'Close',
         });
       }
